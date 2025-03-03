@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-{% load rango_template_tags %}
 
 <html>
     <head lang="en">
     <meta charset="UTF-8" />
     <title>
         {% block title_block %}
-            
+            Fitness Tracker
         {% endblock %}
     </title>
 </head>
     <body>
         <div id = "nav" >
-        <!-- navigation goes here-->
             <ul>
-                {% if user.is_authenticated %}
+                <li><a href="{% url 'fitnessTracker:profile' %}">My Profile</a></li>
+                <li><a href="{% url 'fitnessTracker:tracker' %}">Tracker</a></li>
+                <li><a href="{% url 'fitnessTracker:homepage' %}">Home</a></li>
+                <li><a href="{% url 'fitnessTracker:catalogue' %}">Workout Catalogue</a></li>
                 
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'fitnessTracker:logout' %}">Logout</a></li>
             
                 {% else %}
-                
+                <li><a href="{% url 'fitnessTracker:register' %}">Sign Up</a></li>
+                <li><a href="{% url 'fitnessTracker:login' %}">Login</a></li>
                 
                 {% endif %}
+
                 
-            
                 
             </ul>
         </div>
@@ -34,7 +38,7 @@
         {% endblock %}
         </div>
         
-        <hr />
+        
         
     </body>
 </html>

@@ -14,5 +14,6 @@ path('add_workout/', views.add_workout, name='add_workout'),
 path('add_workout/', views.add_meal, name='add_meal'),
 path('tracker/', views.tracker, name='tracker'),
 path('logout/', views.user_logout, name='logout'),
+path('profile/', views.profile, name='profile'),
 ]
   

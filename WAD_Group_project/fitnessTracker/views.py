@@ -37,9 +37,12 @@ def send_home(request):
     return redirect(reverse('fitnessTracker:homepage'))
 
 def catalogue(request):
-     return render(request, 'fitnessTracker/restricted.html')
+    return render(request, 'fitnessTracker/catalogue.html')
 
 def tracker(request):
-    pass
+    return render(request, 'fitnessTracker/tracker.html')
+
+def profile(request):
+    return render(request, 'fitnessTracker/profile.html')
 
 
