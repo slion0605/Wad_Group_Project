@@ -1,33 +1,43 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
+from django.urls import reverse
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+from django.urls import reverse
+from django.http import HttpResponse
 
 def homepage(request):
-    pass
+    return render(request, 'fitnessTracker/homepage.html')
 
 def show_workout(request):
-    pass
+    return render(request, 'fitnessTracker/workout.html')
 
 def add_workout(request):
-    pass
+    return render(request, 'fitnessTracker/add_workout.html')
 
 def add_meal(request):
-    pass
+    return render(request, 'fitnessTracker/add_meal.html')
 
 def register(request):
-    pass
+    return render(request, 'fitnessTracker/register.html')
 
 def user_login(request):
-    pass
+    return render(request, 'fitnessTracker/login.html')
 
 @login_required
 def user_logout(request):
-    pass
+    logout(request)
+    return redirect(reverse('fitnessTracker:homepage'))
 
 def send_home(request):
-    pass
+    return redirect(reverse('fitnessTracker:homepage'))
 
 def catalogue(request):
-    pass
+     return render(request, 'fitnessTracker/restricted.html')
 
 def tracker(request):
     pass
