@@ -4,6 +4,7 @@
 <html>
 <head lang="en">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     <meta charset="UTF-8" />
     <title>
         {% block title_block %}
@@ -14,8 +15,8 @@
     </title>
 </head>
     <body>
-        <div class = "nav" >
-            <ul>
+        <div  >
+            <ul class = "nav">
                 <li><a href="{% url 'fitnessTracker:profile' %}">My Profile</a></li>
                 <li><a href="{% url 'fitnessTracker:tracker' %}">Tracker</a></li>
                 <li><a href="{% url 'fitnessTracker:homepage' %}">Home</a></li>

@@ -3,6 +3,7 @@ const datesElement = document.getElementById("dates");
 const prevButton = document.getElementById("prevButton");
 const nextButton = document.getElementById("nextButton");
 
+
 let currentDate = new Date();
 
 const updateCalendar = () => {
@@ -37,6 +38,7 @@ const updateCalendar = () => {
     for (let i = 1; i <= 7 - lastDayIndex; i++) {
         const nextDate = new Date(currentYear, currentMonth + 1, i);
         datesHtml += `<div class="date inactive">${nextDate.getDate()}</div>`;
+        
     }
 
     datesElement.innerHTML = datesHtml;
@@ -53,4 +55,16 @@ nextButton.addEventListener('click', () => {
 });
 
 
+
 updateCalendar();
+
+$(document).ready(function () {
+    
+    $(document).on("click", ".date", function () {
+        $(".date").removeClass("selected");
+        $(this).addClass("selected");
+        const selectDate = parseInt($(this).text());
+        currentDate.setDate(selectDate);
+        
+    });
+});

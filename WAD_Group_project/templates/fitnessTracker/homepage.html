@@ -13,6 +13,7 @@
 <body>
     
 {% block body_block %}
+    <h1> Test </h1>
     <div class="calendar">
         <div class="header">
             <button id="prevButton">
@@ -34,7 +35,10 @@
         </div>
         <div class="dates" id="dates"></div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{% static 'js/main.js' %}"></script>
-    
+    <div class="workout display">
+
+    </div>
 {% endblock %}
 </body>
