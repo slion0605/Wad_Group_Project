@@ -2,16 +2,19 @@
 {% load staticfiles %}
 
 <html>
-    <head lang="en">
+<head lang="en">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <meta charset="UTF-8" />
     <title>
         {% block title_block %}
             Fitness Tracker
         {% endblock %}
+
+        
     </title>
 </head>
     <body>
-        <div id = "nav" >
+        <div class = "nav" >
             <ul>
                 <li><a href="{% url 'fitnessTracker:profile' %}">My Profile</a></li>
                 <li><a href="{% url 'fitnessTracker:tracker' %}">Tracker</a></li>
@@ -31,6 +34,7 @@
                 
             </ul>
         </div>
+       
         <hr/> 
         <div>
         {% block body_block %}
