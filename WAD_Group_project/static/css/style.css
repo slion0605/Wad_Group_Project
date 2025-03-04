@@ -1,3 +1,4 @@
+
 body {
     min-height: 100vh;
     display: flex;
@@ -11,6 +12,8 @@ body {
     margin: 0;
     padding: 0;
 }
+
+/* this is code for the calander */
 .calendar {
     float: left;
     width: auto; 
@@ -101,4 +104,4 @@ body {
 .date.inactive:hover {
     color: white;
 }
-
+/* code for calendar ends here */

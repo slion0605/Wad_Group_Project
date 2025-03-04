@@ -17,10 +17,10 @@ def show_workout(request):
     return render(request, 'fitnessTracker/workout.html')
 
 def add_workout(request):
-    return render(request, 'fitnessTracker/add_workout.html')
+    return render(request, 'fitnessTracker/addWorkout.html')
 
 def add_meal(request):
-    return render(request, 'fitnessTracker/add_meal.html')
+    return render(request, 'fitnessTracker/addMeal.html')
 
 def register(request):
     return render(request, 'fitnessTracker/register.html')

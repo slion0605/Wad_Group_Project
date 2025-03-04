@@ -2,15 +2,14 @@
 
 {% extends 'fitnessTracker/base.html' %}
 {% load staticfiles %}
-<head>
+
 
 {% block head %}
-    <title>
-        {% block title_block %} Homepage {% endblock %}
-    </title>
+    
+    {% block title_block %} Homepage {% endblock %}
+    
 {% endblock %}
-</head>
-<body>
+
     
 {% block body_block %}
     <h1> Test </h1>
@@ -37,8 +36,10 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{% static 'js/main.js' %}"></script>
-    <div class="workout display">
 
+    <button id="addMeal" type="button"> Add Meal </button>
+    <button id="addWorkout" type="button"> Add Workout </button>
+    <div id ="workout display">
+        
     </div>
 {% endblock %}
-</body>

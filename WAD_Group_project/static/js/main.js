@@ -1,3 +1,5 @@
+
+// calender stuff 
 const monthYearElement = document.getElementById("monthYear");
 const datesElement = document.getElementById("dates");
 const prevButton = document.getElementById("prevButton");
@@ -5,6 +7,7 @@ const nextButton = document.getElementById("nextButton");
 
 
 let currentDate = new Date();
+
 
 const updateCalendar = () => {
     const currentYear = currentDate.getFullYear();
@@ -55,16 +58,22 @@ nextButton.addEventListener('click', () => {
 });
 
 
-
 updateCalendar();
 
+
 $(document).ready(function () {
-    
     $(document).on("click", ".date", function () {
         $(".date").removeClass("selected");
         $(this).addClass("selected");
-        const selectDate = parseInt($(this).text());
+        selectedDate = parseInt($(this).text());
         currentDate.setDate(selectDate);
-        
+    });
+
+    $("#addMeal").on("click", function () {
+        location.href = '/fitnessTracker/add_meal/';
+    });
+
+    $("#addWorkout").on("click", function () {
+        location.href = '/fitnessTracker/add_workout/';
     });
 });
