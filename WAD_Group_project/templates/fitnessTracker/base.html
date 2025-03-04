@@ -20,13 +20,13 @@
                 <li><a href="{% url 'fitnessTracker:profile' %}">My Profile</a></li>
                 <li><a href="{% url 'fitnessTracker:tracker' %}">Tracker</a></li>
                 <li><a href="{% url 'fitnessTracker:homepage' %}">Home</a></li>
-                <li><a href="{% url 'fitnessTracker:catalogue' %}">Workout Catalogue</a></li>
+                <li><a href="{% url 'fitnessTracker:catalogue' %}">Catalogue</a></li>
                 
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'fitnessTracker:logout' %}">Logout</a></li>
             
                 {% else %}
-                <li><a href="{% url 'fitnessTracker:register' %}">Sign Up</a></li>
+
                 <li><a href="{% url 'fitnessTracker:login' %}">Login</a></li>
                 
                 {% endif %}

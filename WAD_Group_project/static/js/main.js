@@ -63,10 +63,16 @@ updateCalendar();
 
 $(document).ready(function () {
     $(document).on("click", ".date", function () {
+        if ($(this).hasClass("inactive")) return;
         $(".date").removeClass("selected");
         $(this).addClass("selected");
-        selectedDate = parseInt($(this).text());
-        currentDate.setDate(selectDate);
+        
+        let selectedDate = parseInt($(this).text());
+        currentDate.setDate(selectedDate);
+        
+        let formattedDate = `${selectedDate} ${monthYearElement.textContent}`;
+        document.getElementById("displayDate").innerText = formattedDate;
+        
     });
 
     $("#addMeal").on("click", function () {

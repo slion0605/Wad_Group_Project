@@ -11,6 +11,8 @@
          </title>
 
         {% block body_block %}
-            <h1>hello</h1>
+            <h1>Login</h1>
+            
+            <p>No account? <a href="{% url 'fitnessTracker:register' %}">Sign Up</a></p>
         {% endblock %}
     </html>
