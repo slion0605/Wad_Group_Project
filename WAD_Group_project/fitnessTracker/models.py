@@ -33,5 +33,6 @@ class Exercise(models.Model):
         verbose_name_plural = 'Exercies'
 
 class UserProfile(models.Model):
-    pass
-
+    user =  models.OneToOneField(User, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.user.username

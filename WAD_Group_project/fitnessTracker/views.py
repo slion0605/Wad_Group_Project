@@ -16,9 +16,11 @@ def homepage(request):
 def show_workout(request):
     return render(request, 'fitnessTracker/workout.html')
 
+@login_required
 def add_workout(request):
     return render(request, 'fitnessTracker/addWorkout.html')
 
+@login_required
 def add_meal(request):
     return render(request, 'fitnessTracker/addMeal.html')
 
