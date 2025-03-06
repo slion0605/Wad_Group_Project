@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+    <html>
+        {% extends 'fitnessTracker/base.html' %}
+        {% load staticfiles %}
+        
+        <title>
+        {% block title_block %}
+            Add Workout
+        {% endblock %}
+         </title>
+
+        {% block body_block %}
+            <h1>Add Meal</h1>
+
+            <div>
+                <form id="workout_form" method="post" action="{% url 'fitnessTracker:add_workout'%}">
+                    {% csrf_token %}
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+                    {% for field in form.visible_fields %}
+                        {{ field.errors }}
+                        {{ field.help_text }}
+                        {{ field }}
+                        <br>
+                    {% endfor %}
+                    <input type="submit" name="submit" value="Create Workout" />
+                </form>
+            </div>
+        {% endblock %}
+    </html>

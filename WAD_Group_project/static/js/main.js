@@ -72,7 +72,7 @@ $(document).ready(function () {
         
         let formattedDate = `${selectedDate} ${monthYearElement.textContent}`;
         document.getElementById("displayDate").innerText = formattedDate;
-        
+        document.getElementById("displayMeal").innerText = "clicked";
     });
 
     $("#addMeal").on("click", function () {

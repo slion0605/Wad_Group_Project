@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+    <html>
+        {% extends 'fitnessTracker/base.html' %}
+
+        {% load staticfiles %}
+        
+        <title>
+        {% block title_block %}
+            workouts
+        {% endblock %}
+         </title>
+
+        {% block body_block %}
+            <h1>{{workout.name}}</h1>
+            {% if exercises %}
+            <ul>
+                {% for exercise in exercises %}
+                <li><h3>{{ exercise.name }}</h3>
+                    <h4>sets:</h4>
+                    <p>{{ exercise.sets }}</p>
+                    <br>
+                    <h4>Reps:</h4>
+                    <p>{{ exercise.reps }}</p>
+                    <br>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                No Exercises yet.
+            {% endif %}
+            <a href="{% url 'fitnessTracker:add_exercise' workout_name_slug=workout.slug %}">Add Exercise</a> 
+            <br />
+
+
+        {% endblock %}
+    </html>s

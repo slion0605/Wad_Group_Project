@@ -9,20 +9,78 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.http import HttpResponse
+from fitnessTracker.models import Meal, Workout, Exercise
+from fitnessTracker.forms import MealForm, WorkoutForm, ExerciseForm
 
 def homepage(request):
-    return render(request, 'fitnessTracker/homepage.html')
+    context_dict = {}
+    context_dict['meals'] = Meal.objects.all()
+    context_dict['workouts'] = Workout.objects.all()
+    return render(request, 'fitnessTracker/homepage.html', context=context_dict)
 
-def show_workout(request):
-    return render(request, 'fitnessTracker/workout.html')
+def show_workout(request, workout_name_slug):
+    context_dict = {}
+    try:
+        workout = Workout.objects.get(slug=workout_name_slug)
+        exercises = Exercise.objects.filter(workout=workout)
+        context_dict['workout'] = workout
+        context_dict['exercises']= exercises
+    except Workout.DoesNotExist:
+        context_dict['workout'] = None
+        context_dict['exercises'] = None
+    return render(request, 'fitnessTracker/workout.html', context=context_dict)
 
-@login_required
+
 def add_workout(request):
-    return render(request, 'fitnessTracker/addWorkout.html')
+    form = WorkoutForm
 
-@login_required
+    if request.method == 'POST':
+        form = WorkoutForm(request.POST)
+        form.save(commit=True)
+        return redirect('fitnessTracker:homepage')
+    else:
+        print(form.errors)
+
+    return render(request, 'fitnessTracker/add_workout.html', {'form': form})
+
+
 def add_meal(request):
-    return render(request, 'fitnessTracker/addMeal.html')
+    form = MealForm()
+
+    if request.method == 'POST':
+        form = MealForm(request.POST)
+
+        if form.is_valid(): 
+            form.save(commit=True)
+            return redirect('fitnessTracker:homepage')
+    else:
+        print(form.errors)
+    return render(request, 'fitnessTracker/add_meal.html', {'form': form})
+
+def add_exercise(request, workout_name_slug):
+    try:
+        workout = Workout.objects.get(slug=workout_name_slug)
+    except Workout.DoesNotExist:
+        workout = None
+
+    if workout is None:
+        return redirect('fitnessTracker:homepage')
+    
+    form = ExerciseForm()
+
+    if request.method == 'POST':
+        form = ExerciseForm(request.POST)
+
+        if form.is_valid(): 
+            if workout:
+                exercise = form.save(commit=True)
+                return redirect(reverse('fitnessTracker:show_workout',kwargs={'workout_name_slug': workout_name_slug}))
+
+    else:
+        print(form.errors)
+
+    context_dict = {'form': form, 'workout': workout}
+    return render(request, 'fitnessTracker/add_exercise.html', context=context_dict)
 
 def register(request):
     return render(request, 'fitnessTracker/register.html')

@@ -42,8 +42,22 @@
     <div id ="workout display">
         <h2 id="displayDate"></h2>
         <h3>Meals:</h3>
-        
+        <p id = "displayMeal"></p>
         <h3>Exercise:</h3>
         
     </div>
+    <div>
+    current meals
+    {% for meal in meals%}
+        <h4>{{meal.name}}</h4>
+        <p></p>
+    {% endfor %}
+
+    current workouts
+    {% for workout in workouts %}
+        <a href="{% url 'fitnessTracker:show_workout' workout_name_slug=workout.slug %}">{{ workout.name }}</a>
+        <br>
+    {% endfor %}
+    </div>
+    
 {% endblock %}
