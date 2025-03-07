@@ -61,7 +61,10 @@ nextButton.addEventListener('click', () => {
 updateCalendar();
 
 
+
 $(document).ready(function () {
+    let visibleElement = null
+    
     $(document).on("click", ".date", function () {
         if ($(this).hasClass("inactive")) return;
         $(".date").removeClass("selected");
@@ -71,9 +74,13 @@ $(document).ready(function () {
         currentDate.setDate(selectedDate);
         
         let formattedDate = `${selectedDate} ${monthYearElement.textContent}`;
-
+        
+        if(visibleElement != null ){
+            document.getElementById(visibleElement).style.display = "none";
+        }
         document.getElementById(formattedDate).style.display = "block";
        
+        visibleElement = formattedDate;
     });
 
     $("#addMeal").on("click", function() {
