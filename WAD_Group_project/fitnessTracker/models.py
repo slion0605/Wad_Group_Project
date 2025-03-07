@@ -87,23 +87,23 @@ class Exercise(models.Model):
 class CalanderDate(models.Model):
 
     MONTHS = [
-        ("JANUARY", "January"),
-        ("FEBRUARY", "February"),
-        ("MARCH", "March"),
-        ("APRIl", "April"),
-        ("MAY", "May"),
-        ("JUNE", "June"),
-        ("JULY", "July"),
-        ("AUGUST", "August"),
-        ("SEPTEMBER", "September"),
-        ("OCTOBER", "October"),
-        ("NOVEMBER", "November"),
-        ("DECEMBER", "December")
+        ("January", "January"),
+        ("February", "February"),
+        ("March", "March"),
+        ("April", "April"),
+        ("May", "May"),
+        ("June", "June"),
+        ("July", "July"),
+        ("August", "August"),
+        ("September", "September"),
+        ("October", "October"),
+        ("November", "November"),
+        ("December", "December")
     ]
     
     # user = models.ForeignKey(User, on_delete=models.CASCADE)
-    meal = models.ManyToManyField(Meal)
-    workout = models.ManyToManyField(Workout)
+    meals = models.ManyToManyField(Meal)
+    workouts = models.ManyToManyField(Workout)
     month =  models.CharField(max_length=20, choices=MONTHS)
     year = models.IntegerField(default=2025)
     day = models.IntegerField(default=1)

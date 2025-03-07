@@ -16,6 +16,7 @@ def homepage(request):
     context_dict = {}
     context_dict['meals'] = Meal.objects.all()
     context_dict['workouts'] = Workout.objects.all()
+    context_dict['logs'] = CalanderDate.objects.all()
     return render(request, 'fitnessTracker/homepage.html', context=context_dict)
 
 def show_workout(request, workout_name_slug):
@@ -32,7 +33,7 @@ def show_workout(request, workout_name_slug):
 
 
 def add_workout(request):
-    form = WorkoutForm
+    form = WorkoutForm()
 
     if request.method == 'POST':
         form = WorkoutForm(request.POST)

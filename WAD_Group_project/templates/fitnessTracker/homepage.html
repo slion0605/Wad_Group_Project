@@ -22,7 +22,7 @@
                 <i> > </i>
             </button>
         </div>
-        <div class="days" onmouseover="showDay">
+        <div class="days" >
             <div class="day">Mon</div>
             <div class="day">Tues</div>
             <div class="day">Wed</div>
@@ -39,13 +39,27 @@
     <button id="addMeal" type="button"> Add Meal </button>
     <button id="addWorkout" type="button"> Add Workout </button>
     <button id="addLog" type="button"> Add Log </button>
+    <p id="selected"></p>
 
-    <div id ="workout display">
-        <h2 id="displayDate"></h2>
-        <h3>Meals:</h3>
-        <p id = "displayMeal"></p>
-        <h3>Exercise:</h3>
-        
+    <div id ="workout_display">
+        {% for log in logs %}
+        <div id = '{{log}}' style="display: none;"  >
+            <ul>
+                <h3>{{log}}</h3> 
+                    <h4>meal</h4>
+                    {% for meal in log.meals.all %}
+                        <li>{{ meal }}</li>
+                    {% endfor %}
+                    <h4>exercise</h4>
+                    {% for workout in log.workouts.all %}
+                        <li>{{ workout }}</li>
+                    {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
     </div>
     
+    <!--  --> 
 {% endblock %}
