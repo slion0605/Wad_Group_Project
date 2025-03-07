@@ -6,15 +6,15 @@
         
         <title>
         {% block title_block %}
-            Add Workout
+            Add Log
         {% endblock %}
          </title>
 
         {% block body_block %}
-            <h1>Add Workout</h1>
+            <h1>Add Log</h1>
 
             <div>
-                <form id="workout_form" method="post" action="{% url 'fitnessTracker:add_workout'%}">
+                <form id="log_Form" method="post" action= "{% url 'fitnessTracker:add_log'%}">
                     {% csrf_token %}
                     {% for hidden in form.hidden_fields %}
                         {{ hidden }}
@@ -22,10 +22,10 @@
                     {% for field in form.visible_fields %}
                         {{ field.errors }}
                         {{ field.help_text }}
-                        {{ field }}
+                        {{ field}}
                         <br>
                     {% endfor %}
-                    <input type="submit" name="submit" value="Create Workout" />
+                    <input type="submit" name="submit" value="Create Log" />
                 </form>
             </div>
         {% endblock %}

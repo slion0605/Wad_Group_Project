@@ -36,6 +36,9 @@ class Meal(models.Model):
     class Meta:
         verbose_name_plural = 'Meals'
 
+    def __str__(self):
+        return self.name
+
 
 class Workout(models.Model):
     CARDIO = "Cardio"
@@ -78,3 +81,32 @@ class Exercise(models.Model):
     class Meta:
         verbose_name_plural = 'Exercises'
 
+    def __str__(self):
+        return self.name
+
+class CalanderDate(models.Model):
+
+    MONTHS = [
+        ("JANUARY", "January"),
+        ("FEBRUARY", "February"),
+        ("MARCH", "March"),
+        ("APRIl", "April"),
+        ("MAY", "May"),
+        ("JUNE", "June"),
+        ("JULY", "July"),
+        ("AUGUST", "August"),
+        ("SEPTEMBER", "September"),
+        ("OCTOBER", "October"),
+        ("NOVEMBER", "November"),
+        ("DECEMBER", "December")
+    ]
+    
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    meal = models.ManyToManyField(Meal)
+    workout = models.ManyToManyField(Workout)
+    month =  models.CharField(max_length=20, choices=MONTHS)
+    year = models.IntegerField(default=2025)
+    day = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.day} {self.month} {self.year}"

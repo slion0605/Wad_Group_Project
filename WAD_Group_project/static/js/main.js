@@ -75,11 +75,15 @@ $(document).ready(function () {
         document.getElementById("displayMeal").innerText = "clicked";
     });
 
-    $("#addMeal").on("click", function () {
-        location.href = '/fitnessTracker/add_meal/';
+    $("#addMeal").on("click", function() {
+        location.href = '/fitnessTracker/add_meal/'; 
     });
 
-    $("#addWorkout").on("click", function () {
-        location.href = '/fitnessTracker/add_workout/';
+    $("#addWorkout").on("click", function() {
+        location.href = '/fitnessTracker/add_workout/'; 
+    });
+
+    $("#addLog").on("click", function() {
+        location.href = '/fitnessTracker/add_log/'; 
     });
 });

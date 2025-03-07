@@ -13,5 +13,17 @@
 
         {% block body_block %}
             <h1>Workouts</h1>
+
+            <div>
+                current workouts
+                <ul>
+                    {% for workout in workouts %}
+                    <li><a href="{% url 'fitnessTracker:show_workout' workout_name_slug=workout.slug %}">{{ workout.name }}</a></li>
+                    <br>
+                {% endfor %}
+                </ul>
+                
+                </div>
         {% endblock %}
+
     </html>

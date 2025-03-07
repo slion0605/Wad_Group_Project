@@ -9,8 +9,8 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.http import HttpResponse
-from fitnessTracker.models import Meal, Workout, Exercise
-from fitnessTracker.forms import MealForm, WorkoutForm, ExerciseForm
+from fitnessTracker.models import Meal, Workout, Exercise, CalanderDate
+from fitnessTracker.forms import MealForm, WorkoutForm, ExerciseForm, CalanderDateForm
 
 def homepage(request):
     context_dict = {}
@@ -82,6 +82,19 @@ def add_exercise(request, workout_name_slug):
     context_dict = {'form': form, 'workout': workout}
     return render(request, 'fitnessTracker/add_exercise.html', context=context_dict)
 
+def add_log(request):
+    form = CalanderDateForm()
+
+    if request.method == 'POST':
+        form = CalanderDateForm(request.POST)
+        form.save(commit=True)
+        return redirect('fitnessTracker:homepage')
+    else:
+        print(form.errors)
+
+    return render(request, 'fitnessTracker/add_log.html', {'form': form})
+
+
 def register(request):
     return render(request, 'fitnessTracker/register.html')
 
@@ -97,7 +110,9 @@ def send_home(request):
     return redirect(reverse('fitnessTracker:homepage'))
 
 def catalogue(request):
-    return render(request, 'fitnessTracker/catalogue.html')
+    context_dict = {}
+    context_dict['workouts'] = Workout.objects.all()
+    return render(request, 'fitnessTracker/catalogue.html', context=context_dict)
 
 def tracker(request):
     return render(request, 'fitnessTracker/tracker.html')
