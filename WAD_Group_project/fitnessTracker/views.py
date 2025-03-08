@@ -95,18 +95,6 @@ def add_log(request):
 
     return render(request, 'fitnessTracker/add_log.html', {'form': form})
 
-
-def register(request):
-    return render(request, 'fitnessTracker/register.html')
-
-def user_login(request):
-    return render(request, 'fitnessTracker/login.html')
-
-@login_required
-def user_logout(request):
-    logout(request)
-    return redirect(reverse('fitnessTracker:homepage'))
-
 def send_home(request):
     return redirect(reverse('fitnessTracker:homepage'))
 

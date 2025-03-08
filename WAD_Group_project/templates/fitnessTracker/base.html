@@ -4,14 +4,11 @@
 <html>
 <head lang="en">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
     <meta charset="UTF-8" />
     <title>
         {% block title_block %}
             Fitness Tracker
         {% endblock %}
-
-        
     </title>
 </head>
     <body>
@@ -23,27 +20,19 @@
                 <li><a href="{% url 'fitnessTracker:catalogue' %}">Catalogue</a></li>
                 
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'fitnessTracker:logout' %}">Logout</a></li>
+                <li><a href="{% url 'auth_logout' %}?next={% url 'fitnessTracker:homepage' %}">Logout</a></li>
             
                 {% else %}
-
-                <li><a href="{% url 'fitnessTracker:login' %}">Login</a></li>
+                <li><a href="{% url 'registration_register' %}">Sign Up</a></li>
+                <li><a href="{% url 'auth_login' %}">Login</a></li>
                 
-                {% endif %}
-
-                
-                
+                {% endif %}                
             </ul>
         </div>
-       
         <hr/> 
         <div>
         {% block body_block %}
-        
         {% endblock %}
         </div>
-        
-        
-        
     </body>
 </html>

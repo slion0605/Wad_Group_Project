@@ -30,6 +30,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = 'fitnessTracker:homepage'
+
+REGISTRATION_OPEN = True
+
+REGISTRATION_AUTO_LOGIN = True
+
+LOGIN_REDIRECT_URL = 'fitnessTracker:homepage'
+
+LOGIN_URL = 'auth_login'
+
 
 # Application definition
 
@@ -41,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'fitnessTracker',
+    'registration',
 ]
 
 MIDDLEWARE = [
