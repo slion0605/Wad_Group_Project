@@ -115,7 +115,7 @@ def catalogue(request):
     temporary = Workout.objects.all()
     workout_by_exercise = {}
     for entry in temporary:
-        workouts = context_dict.get(entry.exercise_type, [])
+        workouts = workout_by_exercise.get(entry.exercise_type, [])
         workouts.append(entry)
         workout_by_exercise[entry.exercise_type] = workouts
     
