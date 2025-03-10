@@ -1,29 +1,37 @@
 <!DOCTYPE html>
-
+    {% extends 'fitnessTracker/base.html' %}
     <html>
-        {% extends 'fitnessTracker/base.html' %}
-
         {% load staticfiles %}
         
-        <title>
-        {% block title_block %}
-            Catalogue
-        {% endblock %}
-         </title>
+        <head>
+            <title>
+            {% block title_block %}
+                Catalogue
+            {% endblock %}
+            </title>
+            
+        </head>
 
         {% block body_block %}
-            <h1>Workouts</h1>
-
-            <div>
-                current workouts
-                <ul>
-                    {% for workout in workouts %}
-                    <li><a href="{% url 'fitnessTracker:show_workout' workout_name_slug=workout.slug %}">{{ workout.name }}</a></li>
-                    <br>
-                {% endfor %}
-                </ul>
-                
+        
+            {% for key, value in workouts.items %}
+                <div id="{{ key }}" >
+                    <p>{{ key }}</p>
+                    <button id="browse-{{ key }}" type="button"> browse </button>
+                    <div id="{{ key }}-info" style="display: none;">
+                        {{ key }}
+                    <ul>
+                        {% for workout in value %}
+                            <li><a href="{% url 'fitnessTracker:show_workout' workout_name_slug=workout.slug %}">{{ workout.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    </div>
                 </div>
+            {% endfor %}
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <script src="{% static 'js/catalogueScript.js' %}"></script>
         {% endblock %}
 
     </html>
+

@@ -81,7 +81,7 @@ def add_exercise(request, workout_name_slug):
 
         if form.is_valid(): 
             if workout:
-                exercise = form.save(commit=True)
+                form.save(commit=True)
                 return redirect(reverse('fitnessTracker:show_workout',kwargs={'workout_name_slug': workout_name_slug}))
 
     else:
@@ -107,7 +107,15 @@ def send_home(request):
 
 def catalogue(request):
     context_dict = {}
-    context_dict['workouts'] = Workout.objects.all()
+    temporary = Workout.objects.all()
+    workout_by_exercise = {}
+    for entry in temporary:
+        workouts = workout_by_exercise.get(entry.exercise_type, [])
+        workouts.append(entry)
+        workout_by_exercise[entry.exercise_type] = workouts
+    
+    context_dict['workouts'] = workout_by_exercise
+        
     return render(request, 'fitnessTracker/catalogue.html', context=context_dict)
 
 def tracker(request):
