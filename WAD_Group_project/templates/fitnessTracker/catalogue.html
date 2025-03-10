@@ -12,18 +12,17 @@
          </title>
 
         {% block body_block %}
-            <h1>Workouts</h1>
-
-            <div>
-                current workouts
-                <ul>
-                    {% for workout in workouts %}
+            {% for key, value in workouts.items %}
+                <div id=key >
+                    <p>{{ key }}</p>
+                    {% for workout in value %}
                     <li><a href="{% url 'fitnessTracker:show_workout' workout_name_slug=workout.slug %}">{{ workout.name }}</a></li>
-                    <br>
-                {% endfor %}
-                </ul>
-                
+                    {% endfor %}
                 </div>
+            {% endfor %}
+
+
         {% endblock %}
 
     </html>
+
