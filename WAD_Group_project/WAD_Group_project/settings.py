@@ -40,6 +40,11 @@ LOGIN_REDIRECT_URL = 'fitnessTracker:homepage'
 
 LOGIN_URL = 'auth_login'
 
+REGISTRATION_FORM = 'fitnessTracker.forms.RegistrationForm'
+
+ACCOUNT_ACTIVATION_DAYS = 0
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Application definition
 
@@ -50,8 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'fitnessTracker',
     'registration',
+    'fitnessTracker.apps.FitnessTrackerConfig',
 ]
 
 MIDDLEWARE = [
@@ -69,7 +74,7 @@ ROOT_URLCONF = 'WAD_Group_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR, ],
+        'DIRS': [TEMPLATE_DIR, 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

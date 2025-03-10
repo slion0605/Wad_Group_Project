@@ -1,5 +1,35 @@
 from django import forms
-from fitnessTracker.models import Meal, Workout, Exercise, CalanderDate
+from registration.forms import RegistrationForm
+from fitnessTracker.models import Meal, Workout, Exercise, CalanderDate, User, UserProfile
+
+class RegistrationForm(RegistrationForm):
+    birth_date = forms.DateField(required=True, widget=forms.DateInput(attrs={'type': 'date'}))
+    gender = forms.ChoiceField(choices=UserProfile.GENDER_CHOICES, required=True)
+    weight = forms.DecimalField(max_digits=5, decimal_places=2, required=True)
+    height = forms.DecimalField(max_digits=5, decimal_places=2, required=True)
+    goal = forms.ChoiceField(choices=UserProfile.GOAL_CHOICES, required=True)
+    experience = forms.ChoiceField(choices=UserProfile.EXERCISE_CHOICES, required=False)
+
+    class Meta:
+        model = User 
+        fields = ("username", "email", "password1", "password2")
+
+    def save(self, commit=True):
+        user = super().save(commit=False) 
+        user.set_password(self.cleaned_data["password1"]) 
+        user.is_active = True
+        if commit:
+            user.save() 
+            UserProfile.objects.create(
+                user=user,
+                birth_date=self.cleaned_data['birth_date'],
+                gender=self.cleaned_data['gender'],
+                weight=self.cleaned_data['weight'],
+                height=self.cleaned_data['height'],
+                goal=self.cleaned_data['goal'],
+                experience=self.cleaned_data['experience']
+            )
+        return user
 
 class MealForm(forms.ModelForm):
     name = forms.CharField(help_text="Meal name: ")

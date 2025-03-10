@@ -10,7 +10,14 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.http import HttpResponse
 from fitnessTracker.models import Meal, Workout, Exercise, CalanderDate
-from fitnessTracker.forms import MealForm, WorkoutForm, ExerciseForm, CalanderDateForm
+from fitnessTracker.forms import MealForm, WorkoutForm, ExerciseForm, CalanderDateForm, RegistrationForm
+from registration.backends.default.views import RegistrationView
+
+class MyRegistrationView(RegistrationView):
+    form_class = RegistrationForm
+
+    def get_success_url(self, user=None):
+        return '/accounts/login/' 
 
 def homepage(request):
     context_dict = {}
