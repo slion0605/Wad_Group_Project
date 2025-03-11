@@ -41,25 +41,26 @@
     <button id="addLog" type="button"> Add Log </button>
     <p id="selected"></p>
 
-    <div id ="workout_display">
-        {% for log in logs %}
-        <div id = '{{log}}' style="display: none;"  >
-            <ul>
-                <h3>{{log}}</h3> 
-                    <h4>meal</h4>
-                    {% for meal in log.meals.all %}
-                        <li>{{ meal }}</li>
-                    {% endfor %}
-                    <h4>exercise</h4>
-                    {% for workout in log.workouts.all %}
-                        <li>{{ workout }}</li>
-                    {% endfor %}
-            </ul>
+    {% if user.is_authenticated %}
+        <div id ="workout_display">
+            {% for log in logs %}
+            <div id = '{{log}}' style="display: none;"  >
+                <ul>
+                    <h3>{{log}}</h3> 
+                        <h4>meal</h4>
+                        {% for meal in log.meals.all %}
+                            <li>{{ meal }}</li>
+                        {% endfor %}
+                        <h4>exercise</h4>
+                        {% for workout in log.workouts.all %}
+                            <li>{{ workout }}</li>
+                        {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
-
+    {% endif %}
     </div>
     
-    <!--  --> 
+    
 {% endblock %}
