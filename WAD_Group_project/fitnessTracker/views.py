@@ -21,9 +21,12 @@ class MyRegistrationView(RegistrationView):
 
 def homepage(request):
     context_dict = {}
-    context_dict['meals'] = Meal.objects.all()
+
+    if request.user.is_authenticated:
+        context_dict['meals'] = Meal.objects.filter(user = request.user)
+        context_dict['logs'] = CalanderDate.objects.filter(user = request.user)
+
     context_dict['workouts'] = Workout.objects.all()
-    context_dict['logs'] = CalanderDate.objects.all()
     return render(request, 'fitnessTracker/homepage.html', context=context_dict)
 
 def show_workout(request, workout_name_slug):
@@ -103,6 +106,7 @@ def add_log(request):
             log = form.save(commit=False)
             log.user = request.user
             log.save()
+            form.save_m2m()
             return redirect('fitnessTracker:homepage')
     else:
         print(form.errors)
