@@ -30,8 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = 'fitnessTracker:homepage'
-
 REGISTRATION_OPEN = True
 
 REGISTRATION_AUTO_LOGIN = True

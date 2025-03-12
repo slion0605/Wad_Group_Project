@@ -9,4 +9,3 @@ admin.site.register(Workout, WorkoutAdmin)
 admin.site.register(UserProfile)
 admin.site.register(Exercise)
 admin.site.register(CalanderDate)
-
