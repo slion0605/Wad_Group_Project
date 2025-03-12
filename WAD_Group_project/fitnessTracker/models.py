@@ -46,6 +46,7 @@ class UserProfile(models.Model):
     
 
 class Meal(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
     calories = models.IntegerField(default=0)
     fat = models.IntegerField(default=0)
@@ -121,7 +122,7 @@ class CalanderDate(models.Model):
         ("December", "December")
     ]
     
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     meals = models.ManyToManyField(Meal)
     workouts = models.ManyToManyField(Workout)
     month =  models.CharField(max_length=20, choices=MONTHS)

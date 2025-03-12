@@ -96,8 +96,8 @@ class CalanderDateForm(forms.ModelForm):
     day = forms.IntegerField(help_text="Day: ", min_value=1, max_value=31)
     month = forms.ChoiceField(help_text="Month: ", choices=MONTHS)
     year = forms.IntegerField(help_text= "Year: ", min_value=1900, max_value=2100)
-    workouts = forms.ModelMultipleChoiceField( queryset=Workout.objects.all(),widget=forms.CheckboxSelectMultiple, required=True )
-    meals = forms.ModelMultipleChoiceField( queryset=Meal.objects.all(),widget=forms.CheckboxSelectMultiple, required=True)
+    workouts = forms.ModelMultipleChoiceField( queryset=Workout.objects.all(),widget=forms.CheckboxSelectMultiple )
+    meals = forms.ModelMultipleChoiceField( queryset=Meal.objects.all(),widget=forms.CheckboxSelectMultiple)
 
     class Meta:
         model = CalanderDate

@@ -9,7 +9,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.http import HttpResponse
-from fitnessTracker.models import Meal, Workout, Exercise, CalanderDate
+from fitnessTracker.models import Meal, Workout, Exercise, CalanderDate,User
 from fitnessTracker.forms import MealForm, WorkoutForm, ExerciseForm, CalanderDateForm, RegistrationForm
 from registration.backends.default.views import RegistrationView
 
@@ -27,9 +27,12 @@ class MyRegistrationView(RegistrationView):
 
 def homepage(request):
     context_dict = {}
-    context_dict['meals'] = Meal.objects.all()
+
+    if request.user.is_authenticated:
+        context_dict['meals'] = Meal.objects.filter(user = request.user)
+        context_dict['logs'] = CalanderDate.objects.filter(user = request.user)
+
     context_dict['workouts'] = Workout.objects.all()
-    context_dict['logs'] = CalanderDate.objects.all()
     return render(request, 'fitnessTracker/homepage.html', context=context_dict)
 
 def show_workout(request, workout_name_slug):
@@ -44,7 +47,7 @@ def show_workout(request, workout_name_slug):
         context_dict['exercises'] = None
     return render(request, 'fitnessTracker/workout.html', context=context_dict)
 
-
+@login_required
 def add_workout(request):
     form = WorkoutForm()
 
@@ -57,20 +60,23 @@ def add_workout(request):
 
     return render(request, 'fitnessTracker/add_workout.html', {'form': form})
 
-
+@login_required
 def add_meal(request):
     form = MealForm()
-
+    
     if request.method == 'POST':
         form = MealForm(request.POST)
 
         if form.is_valid(): 
-            form.save(commit=True)
+            meal = form.save(commit=False)
+            meal.user = request.user
+            meal.save()
             return redirect('fitnessTracker:homepage')
     else:
         print(form.errors)
     return render(request, 'fitnessTracker/add_meal.html', {'form': form})
 
+@login_required
 def add_exercise(request, workout_name_slug):
     try:
         workout = Workout.objects.get(slug=workout_name_slug)
@@ -96,13 +102,18 @@ def add_exercise(request, workout_name_slug):
     context_dict = {'form': form, 'workout': workout}
     return render(request, 'fitnessTracker/add_exercise.html', context=context_dict)
 
+@login_required
 def add_log(request):
     form = CalanderDateForm()
 
     if request.method == 'POST':
         form = CalanderDateForm(request.POST)
-        form.save(commit=True)
-        return redirect('fitnessTracker:homepage')
+        if form.is_valid():
+            log = form.save(commit=False)
+            log.user = request.user
+            log.save()
+            form.save_m2m()
+            return redirect('fitnessTracker:homepage')
     else:
         print(form.errors)
 
