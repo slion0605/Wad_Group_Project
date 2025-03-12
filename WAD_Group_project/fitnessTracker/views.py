@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
@@ -130,7 +131,24 @@ def catalogue(request):
     return render(request, 'fitnessTracker/catalogue.html', context=context_dict)
 
 def tracker(request):
-    return render(request, 'fitnessTracker/tracker.html')
+    if request.user.is_authenticated:
+        logs = CalanderDate.objects.filter(user=request.user).order_by('year', 'month', 'day')
+
+        xValues = ""
+        yValues = ""
+
+        for log in logs:
+            xValues += (f"{log.day} {log.month} {log.year}, ") 
+            count = 0
+            for meal in log.meals.all():
+                count += meal.calories
+            yValues += f"{count} " 
+
+        context_dict={}
+        context_dict['xValue'] = xValues
+        context_dict['yValue'] = yValues
+
+    return render(request, 'fitnessTracker/tracker.html', context=context_dict)
 
 def profile(request):
     return render(request, 'fitnessTracker/profile.html')
