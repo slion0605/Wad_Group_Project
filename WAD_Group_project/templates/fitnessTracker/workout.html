@@ -13,6 +13,18 @@
 
         {% block body_block %}
             <h1>{{workout.name}}</h1>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <script src="{% static 'js/favouriteScript.js' %}"></script>
+
+            <form method="POST" action="{% url 'fitnessTracker:add_to_favourites' workout_name_slug=workout.slug  %}">
+                {% csrf_token %}
+                <button type="submit" id="favourite">
+                    {% if workout in user.favourites.all %}
+                        Remove from Favourites
+                    {% else %}
+                        Add to Favourites
+                    {% endif %}
+                </button>
             {% if exercises %}
             <ul>
                 {% for exercise in exercises %}

@@ -10,7 +10,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.http import HttpResponse
-from fitnessTracker.models import Meal, Workout, Exercise, CalanderDate,User
+from fitnessTracker.models import Meal, Workout, Exercise, CalanderDate,UserProfile
 from fitnessTracker.forms import MealForm, WorkoutForm, ExerciseForm, CalanderDateForm, RegistrationForm
 from registration.backends.default.views import RegistrationView
 
@@ -25,6 +25,17 @@ class MyRegistrationView(RegistrationView):
 
     def get_success_url(self, user=None):
         return '/accounts/login/' 
+
+@login_required
+def add_to_favourite(request, workout_name_slug):
+    fav_workout = Workout.objects.get(slug = workout_name_slug)
+    cur_user = UserProfile.objects.get(user=request.user)
+    if fav_workout in cur_user.favourites.all():
+        cur_user.favourites.remove(fav_workout)
+    else:
+        cur_user.favourites.add(fav_workout)
+
+    return redirect('fitnessTracker:show_workout', workout_name_slug=workout_name_slug)
 
 def homepage(request):
     context_dict = {}

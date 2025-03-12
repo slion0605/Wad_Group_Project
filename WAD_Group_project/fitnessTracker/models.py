@@ -3,46 +3,6 @@ from django.db import models
 from django.contrib.auth.models import User  # Use Django's built-in User model
 from django.template.defaultfilters import slugify
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    BEGINNER = "Beginner"
-    INTERMEDIATE = "Intermediate"
-    EXPERT = "Expert"
-
-    EXERCISE_CHOICES = [ 
-        (BEGINNER, "Beginner"),
-        (INTERMEDIATE, "Intermediate"),
-        (EXPERT, "Expert")
-    ]
-
-    MALE = "Male"
-    FEMALE = "Female"
-
-    GENDER_CHOICES = [
-        (MALE, "Male"),
-        (FEMALE, "Female")
-    ]
-
-    LOSE_WEIGHT = "Lose weight"
-    MAINTAIN_WEIGHT = "Maintain weight"
-    GAIN_WEIGHT = "Gain weight"
-
-    GOAL_CHOICES = [
-       (LOSE_WEIGHT, "Lose weight"),
-       (MAINTAIN_WEIGHT, "Maintain weight"),
-       (GAIN_WEIGHT, "Gain weight")
-    ]
-
-    birth_date = models.DateField(null=True, blank=True)
-    gender = models.CharField(max_length=20, choices=GENDER_CHOICES, null=True, blank=True)
-    experience = models.CharField(max_length=20, choices=EXERCISE_CHOICES, default=BEGINNER) 
-    weight = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    height = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True) 
-    goal = models.CharField(max_length=20, choices=GOAL_CHOICES, null=True, blank=True)
-    
-    def __str__(self):
-        return self.user.username
     
 
 class Meal(models.Model):
@@ -89,6 +49,46 @@ class Workout(models.Model):
     def __str__(self):
         return self.name
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    BEGINNER = "Beginner"
+    INTERMEDIATE = "Intermediate"
+    EXPERT = "Expert"
+
+    EXERCISE_CHOICES = [ 
+        (BEGINNER, "Beginner"),
+        (INTERMEDIATE, "Intermediate"),
+        (EXPERT, "Expert")
+    ]
+
+    MALE = "Male"
+    FEMALE = "Female"
+
+    GENDER_CHOICES = [
+        (MALE, "Male"),
+        (FEMALE, "Female")
+    ]
+
+    LOSE_WEIGHT = "Lose weight"
+    MAINTAIN_WEIGHT = "Maintain weight"
+    GAIN_WEIGHT = "Gain weight"
+
+    GOAL_CHOICES = [
+       (LOSE_WEIGHT, "Lose weight"),
+       (MAINTAIN_WEIGHT, "Maintain weight"),
+       (GAIN_WEIGHT, "Gain weight")
+    ]
+
+    birth_date = models.DateField(null=True, blank=True)
+    gender = models.CharField(max_length=20, choices=GENDER_CHOICES, null=True, blank=True)
+    experience = models.CharField(max_length=20, choices=EXERCISE_CHOICES, default=BEGINNER) 
+    weight = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    height = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True) 
+    goal = models.CharField(max_length=20, choices=GOAL_CHOICES, null=True, blank=True)
+    favourites = models.ManyToManyField(Workout)
+    def __str__(self):
+        return self.user.username
 
 class Exercise(models.Model):
     
