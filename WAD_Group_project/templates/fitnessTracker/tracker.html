@@ -19,33 +19,14 @@
 
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-           
+            <script src="{% static 'js/trackerScript.js' %}"></script>
+
             <h2>Calorie Tracker</h2>
             <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 
-            <script>
+            {% if user.is_authenticated %}
+                <p id="logMessage" style="display: none;"> add logs to view tracker</p>
 
-                const xValues = document.getElementById("xValues").innerText.split(",");
-                xValues.pop()
-                const yValues = document.getElementById("yValues").innerText.split(" ");
-
-                new Chart("myChart", {
-                type: "line",
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                    fill: false,
-                    lineTension: 0,
-                    backgroundColor: "rgba(0,0,255,1.0)",
-                    borderColor: "rgba(0,0,255,0.1)",
-                    data: yValues
-                    }]
-                },
-                options: {
-                    legend: {display: false},
-                    
-                }
-                });
-            </script>
+            {% endif %}
         {% endblock %}
     </html>

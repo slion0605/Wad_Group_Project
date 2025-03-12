@@ -136,7 +136,9 @@ def catalogue(request):
         
     return render(request, 'fitnessTracker/catalogue.html', context=context_dict)
 
+@login_required
 def tracker(request):
+    context_dict={}
     if request.user.is_authenticated:
         logs = CalanderDate.objects.filter(user=request.user).order_by('year', 'month', 'day')
 
@@ -150,7 +152,7 @@ def tracker(request):
                 count += meal.calories
             yValues += f"{count} " 
 
-        context_dict={}
+        
         context_dict['xValue'] = xValues
         context_dict['yValue'] = yValues
 
