@@ -1,42 +1,149 @@
-
 body {
     min-height: 100vh;
     display: flex;
-    background: whitesmoke;
+    background: #f0f2f5;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    position: fixed;
+}
 
-.nav{
-    
+.sidebar ul {
     list-style-type: none;
-    
+    padding: 0;
+    margin: 0;
 }
 
-/* this is code for the calander */
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    display: block;
+    color: white;
+    text-align: left;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #111;
+}
+
+.container {
+    margin-left: 270px; /* Ensure it doesn't overlap with sidebar */
+    max-width: 800px; /* Controls width */
+    padding: 20px;
+    background: #fff; /* White background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.catalogue-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.catalogue-item p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.catalogue-item button {
+    padding: 10px 20px;
+    background: #28a745;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.catalogue-item button:hover {
+    background: #218838;
+}
+
+.catalogue-item ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.catalogue-item ul li {
+    margin-bottom: 5px;
+}
+
+.catalogue-item ul li a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.catalogue-item ul li a:hover {
+    text-decoration: underline;
+}
+
+.nav {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: #333;
+}
+
+.nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* this is code for the calendar */
 .calendar {
     float: right;
     width: auto; 
     height: auto;
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    background: white;
+    padding: 20px;
+    background: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 10px 0;
 }
-
 
 .monthYear {
     text-align: center;
     font-weight: 600;
     width: 150px;
+    font-size: 1.2em;
+    color: #555;
 }
 
 .header button {
@@ -44,35 +151,41 @@ body {
     align-items: center;
     justify-content: center;
     border: none;
-    background: white;
+    background: #f0f2f5;
     cursor: pointer;
     width: 40px;
     height: 40px;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 50%;
+    transition: background 0.3s, box-shadow 0.3s;
 }
 
+.header button:hover {
+    background: #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
 .days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    margin-top: 10px;
+    font-weight: 600;
+    color: #777;
 }
 
-.day{    
+.day {    
     text-align: center;
     padding: 5px;
     color: gray;
     font-weight: 500;
 }
 
-
 .dates {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
-    
+    margin-top: 10px;
 }
-
 
 .date {
     display: flex;
@@ -86,15 +199,14 @@ body {
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    transition: 0.2s;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
 }
 
-
-.date:hover , .selected{
-    background:red;
-    color: black;
+.date:hover, .selected {
+    background: #28a745;
+    color: #fff;
+    transform: scale(1.1);
 }
-
 
 .date.inactive {
     color: lightgray;
@@ -102,5 +214,69 @@ body {
 
 .date.inactive:hover {
     color: white;
+    background: #ccc;
 }
-/* code for calendar ends here */
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="date"],
+form input[type="number"],
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background: #28a745;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+form input[type="submit"]:hover {
+    background: #28a745;
+}
+
+.help-text {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.errorlist {
+    color: red;
+    margin-bottom: 10px;
+}

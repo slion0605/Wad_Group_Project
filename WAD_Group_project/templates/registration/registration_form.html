@@ -1,16 +1,15 @@
 {% extends 'fitnessTracker/base.html' %}
+{% load static %}
 
 {% block title_block %}
     Register
 {% endblock %}
 
 {% block body_block %}
-<h1>Create an Account</h1>
-
-<form method="post" action=".">
-    {% csrf_token %}
-    {{ form.as_p }}
-
-    <input type="submit" value="Register" />
-</form>
+    <h1>Create User Profile</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
 {% endblock %}
