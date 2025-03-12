@@ -16,6 +16,12 @@ from registration.backends.default.views import RegistrationView
 class MyRegistrationView(RegistrationView):
     form_class = RegistrationForm
 
+    def register(self, form):
+        new_user = form.save(commit=True)
+        new_user.is_active = True
+        new_user.save()
+        return new_user
+
     def get_success_url(self, user=None):
         return '/accounts/login/' 
 
