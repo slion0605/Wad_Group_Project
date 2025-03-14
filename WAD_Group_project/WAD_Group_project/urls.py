@@ -19,12 +19,13 @@ from django.urls import include
 from fitnessTracker import views
 from django.conf import settings
 from django.conf.urls.static import static
-from fitnessTracker.views import MyRegistrationView
+from fitnessTracker.views import MyRegistrationView, MyPasswordChangeView
 
 urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('fitnessTracker/', include('fitnessTracker.urls')),
     path('admin/', admin.site.urls),
     path('accounts/register/', MyRegistrationView.as_view(), name='registration_register'),
+    path('accounts/password/change/', MyPasswordChangeView.as_view(), name='auth_password_change'),
     path('accounts/', include('registration.backends.default.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

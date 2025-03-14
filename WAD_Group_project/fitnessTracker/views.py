@@ -8,11 +8,12 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse
 from fitnessTracker.models import Meal, Workout, Exercise, CalanderDate,UserProfile
 from fitnessTracker.forms import MealForm, WorkoutForm, ExerciseForm, CalanderDateForm, RegistrationForm
 from registration.backends.default.views import RegistrationView
+from django.contrib.auth.views import PasswordChangeView
 
 class MyRegistrationView(RegistrationView):
     form_class = RegistrationForm
@@ -24,7 +25,11 @@ class MyRegistrationView(RegistrationView):
         return new_user
 
     def get_success_url(self, user=None):
-        return '/accounts/login/' 
+        return '/accounts/login/'
+
+class MyPasswordChangeView(PasswordChangeView):
+    template_name = 'registration/password_change_form.html'
+    success_url = reverse_lazy('auth_login') 
 
 @login_required
 def add_to_favourite(request, workout_name_slug):
