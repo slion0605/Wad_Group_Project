@@ -1,4 +1,5 @@
 import json
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
@@ -11,9 +12,10 @@ from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse
 from fitnessTracker.models import Meal, Workout, Exercise, CalanderDate,UserProfile
-from fitnessTracker.forms import MealForm, WorkoutForm, ExerciseForm, CalanderDateForm, RegistrationForm
+from fitnessTracker.forms import MealForm, WorkoutForm, ExerciseForm, CalanderDateForm, RegistrationForm, UserProfileForm
 from registration.backends.default.views import RegistrationView
 from django.contrib.auth.views import PasswordChangeView
+from django.views.decorators.csrf import csrf_exempt
 
 class MyRegistrationView(RegistrationView):
     form_class = RegistrationForm
@@ -181,7 +183,34 @@ def tracker(request):
 
     return render(request, 'fitnessTracker/tracker.html', context=context_dict)
 
+@login_required
 def profile(request):
-    return render(request, 'fitnessTracker/profile.html')
+    context_dict ={}
+    user = request.user
+    context_dict['user'] = user
+    context_dict['userProfile'] = UserProfile.objects.get(user = user)
+    return render(request, 'fitnessTracker/profile.html', context=context_dict)
 
 
+def update_profile(request):
+    if request.method == 'POST':
+        try:
+            user_profile = UserProfile.objects.get(user=request.user)
+
+            user_profile.weight = request.POST.get('weight', user_profile.weight)
+            user_profile.experience = request.POST.get('experience', user_profile.experience)
+            user_profile.goal = request.POST.get('goal', user_profile.goal)
+            user_profile.save()
+
+            return JsonResponse({
+                'status': 'success',
+                'data': {
+                    'weight': user_profile.weight,
+                    'experience': user_profile.experience,
+                    'goal': user_profile.goal,
+                }
+            })
+        except UserProfile.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'User profile not found.'})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})

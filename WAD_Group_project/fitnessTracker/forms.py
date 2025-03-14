@@ -103,3 +103,7 @@ class CalanderDateForm(forms.ModelForm):
         model = CalanderDate
         fields = ('day', 'month','year', 'workouts', 'meals')
 
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['birth_date', 'gender', 'weight', 'height', 'goal', 'experience']

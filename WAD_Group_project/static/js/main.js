@@ -1,5 +1,6 @@
-
 // calender stuff 
+// templated used from https://www.youtube.com/watch?v=OcncrLyddAs
+
 const monthYearElement = document.getElementById("monthYear");
 const datesElement = document.getElementById("dates");
 const prevButton = document.getElementById("prevButton");
