@@ -164,8 +164,15 @@ def tracker(request):
             yValues += f"{count} " 
 
         
+        if logs != None :
+            context_dict['newestLog'] = logs.last()
+
+        else:
+            context_dict['newestLog'] = None
+        
         context_dict['xValue'] = xValues
         context_dict['yValue'] = yValues
+        
 
     return render(request, 'fitnessTracker/tracker.html', context=context_dict)
 
