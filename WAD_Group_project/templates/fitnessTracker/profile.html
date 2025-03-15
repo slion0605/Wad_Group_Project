@@ -3,7 +3,6 @@
     <html>
         {% extends 'fitnessTracker/base.html' %}
         {% load static %}
-        <link rel="stylesheet" href="/static/css/style.css">
         <title>
         {% block title_block %}
             profile
@@ -11,6 +10,83 @@
          </title>
 
         {% block body_block %}
-            <h1>Profile</h1>
+            <h1>Profile</h1> 
+            <h2>Hello, {{ user.username }}!</h2>
+            <h4>Birth date:</h4><p id="birth_date">{{ userProfile.birth_date }}</p> 
+            <h4>Weight:</h4><p id="weight">{{ userProfile.weight }}</p>
+            <h4>Experience:</h4><p id="experience">{{ userProfile.experience }}</p>
+            <h4>Gender:</h4><p id="gender">{{ userProfile.gender }}</p>
+            <h4>Height:</h4><p id="height">{{ userProfile.height }}</p>
+            <p id="goal">Goal: {{ userProfile.goal }}</p>
+            <h4>Favourite workouts:</h4>
+            <ul>
+            {% for workout in userProfile.favourites.all %}
+                <li>{{ workout.name }}</li>
+            {% endfor %}
+            </ul>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+         
+
+            <div id="edit-profile-section" style="display:none;">
+                <form id="profile-form" method="POST">
+                    {% csrf_token %}
+                    <label for="weight">Weight:</label>
+                    <input type="text" name="weight" id="weight_input" value="{{ userProfile.weight }}">
+                    
+                    <label for="experience">Experience:</label>
+                    <select name="experience" id="experience_input">
+                        <option value="Beginner" {% if userProfile.experience == "Beginner" %}selected{% endif %}>Beginner</option>
+                        <option value="Intermediate" {% if userProfile.experience == "Intermediate" %}selected{% endif %}>Intermediate</option>
+                        <option value="Expert" {% if userProfile.experience == "Expert" %}selected{% endif %}>Expert</option>
+                    </select>
+                    
+                    <label for="goal">Goal:</label>
+                    <select name="goal" id="goal_input">
+                        <option value="Lose weight" {% if userProfile.goal == "Lose weight" %}selected{% endif %}>Lose weight</option>
+                        <option value="Maintain weight" {% if userProfile.goal == "Maintain weight" %}selected{% endif %}>Maintain weight</option>
+                        <option value="Gain weight" {% if userProfile.goal == "Gain weight" %}selected{% endif %}>Gain weight</option>
+                    </select>
+                    
+                    
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
+        
+            <button id="edit">Edit Profile</button>
+    
+        
+            <script>
+                $(document).ready(function () {
+                    
+                    $("#edit").click(function () {
+                        $("#edit-profile-section").toggle();
+                    });
+        
+                    $("#profile-form").on("submit", function (event) {
+                        event.preventDefault(); 
+                        
+                        $.ajax({
+                            url: "{% url 'fitnessTracker:update_profile' %}",
+                            method: "POST",
+                            data: $(this).serialize(),
+                            success: function (response) {
+                                if (response.status === "success") {
+                                    $("#weight").text(response.data.weight);
+                                    $("#experience").text(response.data.experience);
+                                    $("#goal").text(response.data.goal);
+    
+                                    $("#edit-profile-section").hide();
+                                } else {
+                                    alert(response.message);  
+                                }
+                            },
+                            error: function () {
+                                alert("Error updating the profile. Please try again.");
+                            }
+                        });
+                    });
+                });
+            </script>
         {% endblock %}
     </html>

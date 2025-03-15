@@ -24,9 +24,25 @@
             <h2>Calorie Tracker</h2>
             <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 
+            <h2>Lastest Workout</h2>
+            {% if newestLog %}
+                {{newestLog}}
+                <ul>
+                    {% for workout in newestLog.workouts.all %}
+                    <li>{{workout.name}}</li>
+                    {% endfor %}
+                
+                </ul>
+            {% else %}
+                <p>no logs added </p>
+            {% endif %}
+
             {% if user.is_authenticated %}
                 <p id="logMessage" style="display: none;"> add logs to view tracker</p>
 
             {% endif %}
+
+
+
         {% endblock %}
     </html>

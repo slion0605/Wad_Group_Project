@@ -41,12 +41,12 @@ body {
 }
 
 .container {
-    margin-left: 270px; /* Ensure it doesn't overlap with sidebar */
-    max-width: 800px; /* Controls width */
+    margin-left: 270px; 
+    max-width: 800px; 
     padding: 20px;
-    background: #fff; /* White background */
+    background: #fff; 
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -63,7 +63,7 @@ h1 {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ccc; /* Add border */
+    border: 1px solid #ccc; 
 
 }
 
@@ -110,6 +110,11 @@ h1 {
     padding: 0;
     margin: 0;
     background-color: #333;
+    display: block;
+}
+
+.nav li {
+    display: inline;
 }
 
 .nav li a {
@@ -118,9 +123,10 @@ h1 {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+
 }
 
-/* this is code for the calendar */
+/* this is code for the calendar  be careful when editting */
 .calendar {
     float: right;
     width: auto; 
@@ -218,6 +224,7 @@ h1 {
     color: white;
     background: #ccc;
 }
+/* end of the calander css, try not to mess with the alignment of the elements plz :) */
 
 form {
     max-width: 600px;
@@ -282,3 +289,4 @@ form input[type="submit"]:hover {
     color: red;
     margin-bottom: 10px;
 }
+

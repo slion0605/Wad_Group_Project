@@ -16,5 +16,6 @@ path('workout/<slug:workout_name_slug>/add_exercise/', views.add_exercise, name=
 path('tracker/', views.tracker, name='tracker'),
 path('profile/', views.profile, name='profile'),
 path('add_log/', views.add_log, name='add_log'),
+path('update_profile/', views.update_profile, name='update_profile'),
 ]
   

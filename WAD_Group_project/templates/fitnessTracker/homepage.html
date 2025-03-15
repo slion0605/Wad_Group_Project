@@ -47,11 +47,11 @@
             <div id = '{{log}}' style="display: none;"  >
                 <ul>
                     <h3>{{log}}</h3> 
-                        <h4>meal</h4>
+                        <h4>Meals:</h4>
                         {% for meal in log.meals.all %}
                             <li>{{ meal }}</li>
                         {% endfor %}
-                        <h4>exercise</h4>
+                        <h4>Exercises:</h4>
                         {% for workout in log.workouts.all %}
                             <li>{{ workout }}</li>
                         {% endfor %}
@@ -60,7 +60,5 @@
             {% endfor %}
         </div>
     {% endif %}
-    </div>
-    
-    
+    </div>  
 {% endblock %}
