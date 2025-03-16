@@ -88,5 +88,92 @@
                     });
                 });
             </script>
+
+        <div style="display: flex; position: absolute; right: 200px; top: 50px;">
+            <select id="meal-select">
+                <option value="">Select a Meal</option>
+                {% for meal in meals %}
+                    <option value="{{ meal.id }}">{{ meal.name }}</option>
+                {% endfor %}
+            </select>
+        
+            <div class="meal-details" style="display: none;">
+                <h4 id="meal-name"></h4>
+                <h4 id="meal-calories"></h4>
+                <h4 id="meal-protein"></h4>
+                <h4 id="meal-fat"></h4>
+                <h4 id="meal-carbohydrates"></h4>
+                <h4 id="meal-description"></h4>
+                <button id="edit-meal-btn">Edit Description</button>
+
+                <div id="edit-form" style="display: none;">
+                    <textarea id="new-description"></textarea>
+                    <button id="save-description-btn">Save</button>
+                </div>
+            </div>
+        </div>
+        
+            <script>
+                $(document).ready(function(){
+                    $('#meal-select').on("change", function(){
+                    var mealId = $(this).val();
+                    if (mealId){
+                        $.ajax({
+                            url: "{% url 'fitnessTracker:get_meal' %}",
+                            type: "GET",
+                            data: {'meal_id': mealId},
+                            success: function(response){
+                                $('#meal-name').text(response.name);
+                                $('#meal-calories').text("Calories: " + response.calories);
+                                $('#meal-protein').text("Protein: " + response.protein);
+                                $('#meal-fat').text("Fat: " + response.fat);
+                                $('#meal-carbohydrates').text("Carbohydrates: " + response.carbohydrate);
+                                $('#meal-description').text("Description: " + response.description);
+                                $('.meal-details').show();
+                            },
+                            error: function(){
+                                alert("Error on getting meal details");
+                            }
+                        });
+                    } else {
+                        $(".meal-details").hide();
+                    }
+                });
+            });
+            </script>
+
+            <script>
+                $(document).ready(function(){
+                    $('#edit-meal-btn').click(function(){
+                        $('#edit-form').toggle();
+                    });
+                    $('#save-description-btn').on('click', function(){
+                        var meal_id = $('#meal-select').val();
+                        var new_description = $('#new-description').val()
+                        $.ajax({
+                            url: "{% url 'fitnessTracker:update_meal' %}",
+                            method: 'POST',
+                            data: {
+                                'meal_id': meal_id,
+                                'description': new_description,
+                                'csrfmiddlewaretoken': '{{ csrf_token }}'
+
+                            },
+                            success: function(response){
+                                if (response.status === "success"){
+                                    $('#meal-description').text(response.data);
+                                    $('#edit-form').hide();
+                                    alert("Meal description changed successfully")
+                                } else {
+                                    alert("Error: " + response.message)
+                                }
+                            },
+                            error: function () {
+                                alert("Error updating the meal. Please try again.");
+                            }
+                        });
+                    });
+                });
+            </script>
         {% endblock %}
     </html>

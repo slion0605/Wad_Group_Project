@@ -189,6 +189,7 @@ def profile(request):
     user = request.user
     context_dict['user'] = user
     context_dict['userProfile'] = UserProfile.objects.get(user = user)
+    context_dict['meals'] = Meal.objects.filter(user=request.user)
     return render(request, 'fitnessTracker/profile.html', context=context_dict)
 
 
@@ -214,3 +215,38 @@ def update_profile(request):
             return JsonResponse({'status': 'error', 'message': 'User profile not found.'})
 
     return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+
+def get_meal(request):
+    meal_id = request.GET.get('meal_id')
+    try:
+        meal = Meal.objects.get(pk=meal_id, user=request.user)
+        meal_data = {
+            'name': meal.name,
+            'calories': meal.calories,
+            'protein': meal.protein,
+            'fat': meal.fat,
+            'carbohydrate': meal.carbohydrate,
+            'description': meal.description
+        }
+        return JsonResponse(meal_data)
+    except Meal.DoesNotExist:
+        return JsonResponse({'error': 'Meal not found'}, status=404)
+    
+
+def update_meal(request):
+    if request.method == 'POST':
+        meal_id = request.POST.get('meal_id')
+        if not meal_id:
+            return JsonResponse({'status': 'error', 'message': 'Meal ID not found'}, status=400)
+        try:
+            meal = Meal.objects.get(pk=meal_id, user=request.user)
+            meal.description = request.POST.get('description', meal.description)
+            meal.save()
+            return JsonResponse({
+                'status': 'success',
+                'data': meal.description,
+            })
+        except Meal.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Meal not found.'}, status=404)
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=405)
