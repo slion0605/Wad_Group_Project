@@ -1,6 +1,6 @@
 body {
     min-height: 100vh;
-    display: flex;
+
     background: #f0f2f5;
     font-family: 'Arial', sans-serif;
     color: #333;
@@ -307,10 +307,12 @@ button:hover {
 
 .nav {
     list-style-type: none;
-    padding: 0;
+    padding: 14px 16px;
     margin: 0;
     background-color: #333;
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .nav li {
@@ -318,13 +320,17 @@ button:hover {
 }
 
 .nav li a {
-    display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 
 }
+
+.nav li a:hover {
+    background-color: gray;
+  }
+
 
 /* this is code for the calendar  be careful when editting */
 .calendar {
