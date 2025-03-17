@@ -12,6 +12,7 @@ class Meal(models.Model):
     fat = models.IntegerField(default=0)
     protein = models.IntegerField(default=0)
     carbohydrate = models.IntegerField(default=0)
+    description = models.TextField(blank=True)
 
 
     class Meta:

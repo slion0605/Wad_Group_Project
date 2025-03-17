@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-
-    <html>
-        {% extends 'fitnessTracker/base.html' %}
-        {% load static %}
-        <title>
+<html>
+    {% extends 'fitnessTracker/base.html' %}
+    {% load static %}
+    <title>
         {% block title_block %}
-            profile
+            Profile
         {% endblock %}
-         </title>
+    </title>
 
-        {% block body_block %}
+    {% block body_block %}
+        <div class="profile-section">
             <h1>Profile</h1> 
             <h2>Hello, {{ user.username }}!</h2>
             <h4>Birth date:</h4><p id="birth_date">{{ userProfile.birth_date }}</p> 
@@ -20,73 +20,148 @@
             <p id="goal">Goal: {{ userProfile.goal }}</p>
             <h4>Favourite workouts:</h4>
             <ul>
-            {% for workout in userProfile.favourites.all %}
-                <li>{{ workout.name }}</li>
-            {% endfor %}
+                {% for workout in userProfile.favourites.all %}
+                    <li>{{ workout.name }}</li>
+                {% endfor %}
             </ul>
+        </div>
 
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-         
+        <button id="edit">Edit Profile</button>
 
-            <div id="edit-profile-section" style="display:none;">
-                <form id="profile-form" method="POST">
-                    {% csrf_token %}
-                    <label for="weight">Weight:</label>
-                    <input type="text" name="weight" id="weight_input" value="{{ userProfile.weight }}">
-                    
-                    <label for="experience">Experience:</label>
-                    <select name="experience" id="experience_input">
-                        <option value="Beginner" {% if userProfile.experience == "Beginner" %}selected{% endif %}>Beginner</option>
-                        <option value="Intermediate" {% if userProfile.experience == "Intermediate" %}selected{% endif %}>Intermediate</option>
-                        <option value="Expert" {% if userProfile.experience == "Expert" %}selected{% endif %}>Expert</option>
-                    </select>
-                    
-                    <label for="goal">Goal:</label>
-                    <select name="goal" id="goal_input">
-                        <option value="Lose weight" {% if userProfile.goal == "Lose weight" %}selected{% endif %}>Lose weight</option>
-                        <option value="Maintain weight" {% if userProfile.goal == "Maintain weight" %}selected{% endif %}>Maintain weight</option>
-                        <option value="Gain weight" {% if userProfile.goal == "Gain weight" %}selected{% endif %}>Gain weight</option>
-                    </select>
-                    
-                    
-                    <button type="submit">Save Changes</button>
-                </form>
+        <div id="edit-profile-section">
+            <form id="profile-form" method="POST">
+                {% csrf_token %}
+                <label for="weight">Weight:</label>
+                <input type="text" name="weight" id="weight_input" value="{{ userProfile.weight }}">
+                
+                <label for="experience">Experience:</label>
+                <select name="experience" id="experience_input">
+                    <option value="Beginner" {% if userProfile.experience == "Beginner" %}selected{% endif %}>Beginner</option>
+                    <option value="Intermediate" {% if userProfile.experience == "Intermediate" %}selected{% endif %}>Intermediate</option>
+                    <option value="Expert" {% if userProfile.experience == "Expert" %}selected{% endif %}>Expert</option>
+                </select>
+                
+                <label for="goal">Goal:</label>
+                <select name="goal" id="goal_input">
+                    <option value="Lose weight" {% if userProfile.goal == "Lose weight" %}selected{% endif %}>Lose weight</option>
+                    <option value="Maintain weight" {% if userProfile.goal == "Maintain weight" %}selected{% endif %}>Maintain weight</option>
+                    <option value="Gain weight" {% if userProfile.goal == "Gain weight" %}selected{% endif %}>Gain weight</option>
+                </select>
+                
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+
+        <div class="meal-section">
+            <select id="meal-select">
+                <option value="">Select a Meal</option>
+                {% for meal in meals %}
+                    <option value="{{ meal.id }}">{{ meal.name }}</option>
+                {% endfor %}
+            </select>
+        
+            <div class="meal-details">
+                <h4 id="meal-name"></h4>
+                <h4 id="meal-calories"></h4>
+                <h4 id="meal-protein"></h4>
+                <h4 id="meal-fat"></h4>
+                <h4 id="meal-carbohydrates"></h4>
+                <h4 id="meal-description"></h4>
+                <button id="edit-meal-btn">Edit Description</button>
+
+                <div id="edit-form">
+                    <textarea id="new-description"></textarea>
+                    <button id="save-description-btn">Save</button>
+                </div>
             </div>
-        
-            <button id="edit">Edit Profile</button>
-    
-        
-            <script>
-                $(document).ready(function () {
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#edit").click(function () {
+                    $("#edit-profile-section").toggle();
+                });
+
+                $("#profile-form").on("submit", function (event) {
+                    event.preventDefault(); 
                     
-                    $("#edit").click(function () {
-                        $("#edit-profile-section").toggle();
-                    });
-        
-                    $("#profile-form").on("submit", function (event) {
-                        event.preventDefault(); 
-                        
-                        $.ajax({
-                            url: "{% url 'fitnessTracker:update_profile' %}",
-                            method: "POST",
-                            data: $(this).serialize(),
-                            success: function (response) {
-                                if (response.status === "success") {
-                                    $("#weight").text(response.data.weight);
-                                    $("#experience").text(response.data.experience);
-                                    $("#goal").text(response.data.goal);
-    
-                                    $("#edit-profile-section").hide();
-                                } else {
-                                    alert(response.message);  
-                                }
-                            },
-                            error: function () {
-                                alert("Error updating the profile. Please try again.");
+                    $.ajax({
+                        url: "{% url 'fitnessTracker:update_profile' %}",
+                        method: "POST",
+                        data: $(this).serialize(),
+                        success: function (response) {
+                            if (response.status === "success") {
+                                $("#weight").text(response.data.weight);
+                                $("#experience").text(response.data.experience);
+                                $("#goal").text(response.data.goal);
+
+                                $("#edit-profile-section").hide();
+                            } else {
+                                alert(response.message);  
                             }
-                        });
+                        },
+                        error: function () {
+                            alert("Error updating the profile. Please try again.");
+                        }
                     });
                 });
-            </script>
-        {% endblock %}
-    </html>
+
+                $('#meal-select').on("change", function(){
+                    var mealId = $(this).val();
+                    if (mealId){
+                        $.ajax({
+                            url: "{% url 'fitnessTracker:get_meal' %}",
+                            type: "GET",
+                            data: {'meal_id': mealId},
+                            success: function(response){
+                                $('#meal-name').text(response.name);
+                                $('#meal-calories').text("Calories: " + response.calories);
+                                $('#meal-protein').text("Protein: " + response.protein);
+                                $('#meal-fat').text("Fat: " + response.fat);
+                                $('#meal-carbohydrates').text("Carbohydrates: " + response.carbohydrate);
+                                $('#meal-description').text("Description: " + response.description);
+                                $('.meal-details').show();
+                            },
+                            error: function(){
+                                alert("Error on getting meal details");
+                            }
+                        });
+                    } else {
+                        $(".meal-details").hide();
+                    }
+                });
+
+                $('#edit-meal-btn').click(function(){
+                    $('#edit-form').toggle();
+                });
+
+                $('#save-description-btn').on('click', function(){
+                    var meal_id = $('#meal-select').val();
+                    var new_description = $('#new-description').val()
+                    $.ajax({
+                        url: "{% url 'fitnessTracker:update_meal' %}",
+                        method: 'POST',
+                        data: {
+                            'meal_id': meal_id,
+                            'description': new_description,
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        success: function(response){
+                            if (response.status === "success"){
+                                $('#meal-description').text(response.data);
+                                $('#edit-form').hide();
+                                alert("Meal description changed successfully")
+                            } else {
+                                alert("Error: " + response.message)
+                            }
+                        },
+                        error: function () {
+                            alert("Error updating the meal. Please try again.");
+                        }
+                    });
+                });
+            });
+        </script>
+    {% endblock %}
+</html>

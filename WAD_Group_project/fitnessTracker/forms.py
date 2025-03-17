@@ -37,10 +37,11 @@ class MealForm(forms.ModelForm):
     fat = forms.IntegerField(help_text="fat: ")
     protein = forms.IntegerField(help_text="protein: ")
     carbohydrate = forms.IntegerField(help_text="Carbohydrates: ")
+    description = forms.CharField(help_text="Description: ")
 
     class Meta:
         model = Meal
-        fields = ('name', 'calories', 'fat', 'protein', 'carbohydrate')
+        fields = ('name', 'calories', 'fat', 'protein', 'carbohydrate', 'description')
 
 
 class ExerciseForm(forms.ModelForm):

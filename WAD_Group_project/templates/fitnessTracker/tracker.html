@@ -3,46 +3,44 @@
     <html>
         {% extends 'fitnessTracker/base.html' %}
 
-        {% load staticfiles %}
+        {% load static %}
         
         <title>
         {% block title_block %}
-            tracker
+            Tracker
         {% endblock %}
          </title>
 
         {% block body_block %}
-            <h1>Tracker</h1>
+            <div class="container">
+                <h1>Tracker</h1>
 
-            <p id = "xValues" style="display: none;" >{{xValue}}</p>
-            <p id="yValues" style="display: none;" >{{yValue}}</p>
+                <p id="xValues" style="display: none;">{{ xValue }}</p>
+                <p id="yValues" style="display: none;">{{ yValue }}</p>
 
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                <script src="{% static 'js/trackerScript.js' %}"></script>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-            <script src="{% static 'js/trackerScript.js' %}"></script>
+                <h2>Calorie Tracker</h2>
+                <canvas id="myChart"></canvas>
 
-            <h2>Calorie Tracker</h2>
-            <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+                <div class="latest-workout">
+                    <h2>Latest Workout</h2>
+                    {% if newestLog %}
+                        {{ newestLog }}
+                        <ul>
+                            {% for workout in newestLog.workouts.all %}
+                                <li>{{ workout.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No logs added</p>
+                    {% endif %}
+                </div>
 
-            <h2>Lastest Workout</h2>
-            {% if newestLog %}
-                {{newestLog}}
-                <ul>
-                    {% for workout in newestLog.workouts.all %}
-                    <li>{{workout.name}}</li>
-                    {% endfor %}
-                
-                </ul>
-            {% else %}
-                <p>no logs added </p>
-            {% endif %}
-
-            {% if user.is_authenticated %}
-                <p id="logMessage" style="display: none;"> add logs to view tracker</p>
-
-            {% endif %}
-
-
-
+                {% if user.is_authenticated %}
+                    <p id="logMessage" style="display: none;">Add logs to view tracker</p>
+                {% endif %}
+            </div>
         {% endblock %}
     </html>
