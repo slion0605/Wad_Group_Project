@@ -1,6 +1,5 @@
 body {
     min-height: 100vh;
-
     background: #f0f2f5;
     font-family: 'Arial', sans-serif;
     color: #333;
@@ -41,8 +40,8 @@ body {
 }
 
 .container {
-    margin-left: 270px; /* Ensure it doesn't overlap with sidebar */
-    max-width: 800px; /* Controls width */
+    margin: 10%;
+    max-width: auto;
     padding: 20px;
     background: #fff; /* White background */
     border-radius: 10px;
@@ -329,12 +328,19 @@ button:hover {
 
 .nav li a:hover {
     background-color: gray;
-  }
+}
 
+.homeButtons{
+    float: left;
+}
+
+#addButton{
+    display: block;
+}
 
 /* this is code for the calendar  be careful when editting */
 .calendar {
-    float: right;
+    float: left;
     width: auto; 
     height: auto;
     display: flex;
