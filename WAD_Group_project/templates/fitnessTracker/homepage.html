@@ -44,10 +44,11 @@
     </div>
 
     {% if user.is_authenticated %}
-        <div id ="workout_display">
+        <div >
             {% for log in logs %}
-            <div id = '{{log}}' style="display: none;"  >
-                <ul>
+            <div  id = '{{log}}' style="display: none;"  >
+                <ul >
+                    <div class ="workout_display">
                     <h3>{{log}}</h3> 
                         <h4>Meals:</h4>
                         {% for meal in log.meals.all %}
@@ -57,6 +58,7 @@
                         {% for workout in log.workouts.all %}
                             <li>{{ workout }}</li>
                         {% endfor %}
+                    </div>
                 </ul>
             </div>
             {% endfor %}

@@ -108,12 +108,12 @@ canvas {
 }
 
 .profile-section {
-    margin-bottom: 20px;
+    margin: 20px;
     padding: 10px;
-    background: #f9f9f9; /* Light grey background for contrast */
+    background: #f9f9f9; 
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ccc; /* Add border */
+    border: 1px solid #ccc; 
 }
 
 .profile-section h2, .profile-section h4, .profile-section p {
@@ -154,7 +154,7 @@ canvas {
     text-decoration: underline;
 }
 
-button {
+#homeButtons button {
     padding: 10px 20px;
     background: #28a745;
     border: none;
@@ -162,6 +162,21 @@ button {
     color: #fff;
     cursor: pointer;
     transition: background 0.3s;
+    margin: 20px;
+    width: 200px;
+    height: 70px;
+}
+
+.workout_display {
+    margin : 20px;
+    padding: 20px;
+    width: 300px;
+    background: #f9f9f9; 
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc; 
+    float: left;
+    
 }
 
 button:hover {
@@ -204,6 +219,7 @@ button:hover {
     font-size: 1em;
     cursor: pointer;
     transition: background 0.3s;
+    margin: 0%;
 }
 
 #edit-profile-section button:hover {
@@ -212,7 +228,7 @@ button:hover {
 
 .meal-details {
     display: none;
-    margin-top: 20px;
+    margin: 20px;
     padding: 10px;
     background: #f9f9f9;
     border-radius: 10px;
@@ -332,6 +348,7 @@ button:hover {
 
 .homeButtons{
     float: left;
+    display: block;
 }
 
 #addButton{
@@ -349,6 +366,7 @@ button:hover {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
 }
 
 .header {
@@ -560,4 +578,8 @@ form input[type="submit"]:hover {
 
 .meal-section .meal-details #edit-form button:hover {
     background: #218838;
+}
+
+.workout_exercise li{
+    display: inline;
 }
