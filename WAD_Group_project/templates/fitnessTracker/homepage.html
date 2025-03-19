@@ -12,6 +12,7 @@
 
     
 {% block body_block %}
+<div id = "homepage_display">
     <div class="calendar">
         <div class="header">
             <button id="prevButton">
@@ -38,7 +39,9 @@
 
     <div id="homeButtons">
         <button class="addButton" id="addMeal" type="button"> Add Meal </button>
+        <br>
         <button class="addButton" id="addWorkout" type="button"> Add Workout </button>
+        <br>
         <button class="addButton" id="addLog" type="button"> Add Log </button>
         <p id="selected"></p>
     </div>
@@ -64,5 +67,7 @@
             {% endfor %}
         </div>
     {% endif %}
-    </div>  
+    </div> 
+    
+</div>
 {% endblock %}

@@ -40,7 +40,9 @@ body {
 }
 
 .container {
-    margin: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
     max-width: auto;
     padding: 20px;
     background: #fff; /* White background */
@@ -109,11 +111,12 @@ canvas {
 
 .profile-section {
     margin: 20px;
-    padding: 10px;
+    padding-left: 30px;
     background: #f9f9f9; 
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border: 1px solid #ccc; 
+    padding-bottom: 20px;
 }
 
 .profile-section h2, .profile-section h4, .profile-section p {
@@ -128,16 +131,18 @@ canvas {
 .profile-section h4 {
     font-size: 1em;
     color: #777;
+    display: inline-block;
+    padding-right: 20px;
 }
 
 .profile-section p {
     font-size: 1em;
     color: #333;
+    display: inline-block;
 }
 
 .profile-section ul {
-    list-style-type: none;
-    padding: 0;
+    padding-left: 20px;
     margin: 10px 0 0 0;
 }
 
@@ -162,15 +167,19 @@ canvas {
     color: #fff;
     cursor: pointer;
     transition: background 0.3s;
-    margin: 20px;
-    width: 200px;
+    margin: 10px;
+    width: 450px;
     height: 70px;
+}
+
+#homeButtons button:hover{
+    background: #218838;
 }
 
 .workout_display {
     margin : 20px;
     padding: 20px;
-    width: 300px;
+    width: 400px;
     background: #f9f9f9; 
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -523,7 +532,8 @@ form input[type="submit"]:hover {
 .meal-section {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin: 20px;
+
 }
 
 .meal-section select {
@@ -582,4 +592,42 @@ form input[type="submit"]:hover {
 
 .workout_exercise li{
     display: inline;
+}
+
+
+button{
+    
+    padding: 10px;
+    margin: 10px;
+    background: #28a745;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #218838;
+}
+
+#homepage_display{
+    margin-left: 15%;
+}
+
+#meal-select{
+    width: 300px;
+}
+
+.meal-details{
+    margin: 20px;
+}
+
+#edit{
+    margin: 20px;
+}
+
+#sign_up{
+    text-align: center;
 }

@@ -2,28 +2,37 @@
 <html>
     {% extends 'fitnessTracker/base.html' %}
     {% load static %}
+    <head>
     <title>
         {% block title_block %}
             Profile
         {% endblock %}
     </title>
+    </head>
 
     {% block body_block %}
         <div class="profile-section">
-            <h1>Profile</h1> 
-            <h2>Hello, {{ user.username }}!</h2>
-            <h4>Birth date:</h4><p id="birth_date">{{ userProfile.birth_date }}</p> 
-            <h4>Weight:</h4><p id="weight">{{ userProfile.weight }}</p>
-            <h4>Experience:</h4><p id="experience">{{ userProfile.experience }}</p>
-            <h4>Gender:</h4><p id="gender">{{ userProfile.gender }}</p>
-            <h4>Height:</h4><p id="height">{{ userProfile.height }}</p>
-            <p id="goal">Goal: {{ userProfile.goal }}</p>
-            <h4>Favourite workouts:</h4>
-            <ul>
-                {% for workout in userProfile.favourites.all %}
-                    <li>{{ workout.name }}</li>
-                {% endfor %}
-            </ul>
+                <h1>Profile</h1> 
+                <h2>Hello, {{ user.username }}!</h2>
+                <br>
+                <h4>Birth date:</h4><p id="birth_date">{{ userProfile.birth_date }}</p> 
+                <br>
+                <h4>Weight:</h4><p id="weight">{{ userProfile.weight }}</p>
+                <br>
+                <h4>Experience:</h4><p id="experience">{{ userProfile.experience }}</p>
+                <br>
+                <h4>Gender:</h4><p id="gender">{{ userProfile.gender }}</p>
+                <br>
+                <h4>Height:</h4><p id="height">{{ userProfile.height }}</p>
+                <br>
+                <h4 id="goal">Goal: </h4><p>{{ userProfile.goal }}</p>
+                <br>
+                <h4>Favourite workouts:</h4>
+                <ul>
+                    {% for workout in userProfile.favourites.all %}
+                        <li>{{ workout.name }}</li>
+                    {% endfor %}
+                </ul>
         </div>
 
         <button id="edit">Edit Profile</button>
@@ -52,7 +61,10 @@
             </form>
         </div>
 
+        
         <div class="meal-section">
+
+            <h4>Edit meal</h4>
             <select id="meal-select">
                 <option value="">Select a Meal</option>
                 {% for meal in meals %}
