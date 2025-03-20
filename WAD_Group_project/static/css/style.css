@@ -337,10 +337,12 @@ button:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 40px;
 }
 
 .nav li {
     display: inline;
+    width: 200px;
 }
 
 .nav li a {
@@ -348,6 +350,7 @@ button:hover {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    display: block;
 
 }
 
