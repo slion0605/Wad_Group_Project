@@ -49,7 +49,7 @@ class ExerciseForm(forms.ModelForm):
     name = forms.CharField(help_text="Exercise name: ")
     sets = forms.IntegerField(help_text="Sets: ")
     reps = forms.IntegerField(help_text="Reps: ")
-    workout = forms.ModelMultipleChoiceField( queryset=Workout.objects.all(),widget=forms.CheckboxSelectMultiple, required=True)
+    workout = forms.ModelMultipleChoiceField( help_text="Select workouts to add new exercise to: ", queryset=Workout.objects.all(),widget=forms.CheckboxSelectMultiple, required=True)
 
     class Meta:
         model = Exercise

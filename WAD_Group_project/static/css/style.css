@@ -634,3 +634,8 @@ button:hover {
 #sign_up{
     text-align: center;
 }
+
+#workout_exercise li{
+    display: inline-block;
+    margin-right: 50px;
+}
