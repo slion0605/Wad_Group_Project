@@ -70,7 +70,7 @@ class WorkoutForm(forms.ModelForm):
 
     
     name = forms.CharField(help_text="Name: ")
-    exercise_type = forms.ChoiceField(choices=EXERCISE_CHOICES)
+    exercise_type = forms.ChoiceField(help_text="Exercise Type: ",choices=EXERCISE_CHOICES)
     duration = forms.IntegerField(help_text="Duration: ")
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
@@ -97,8 +97,8 @@ class CalanderDateForm(forms.ModelForm):
     day = forms.IntegerField(help_text="Day: ", min_value=1, max_value=31)
     month = forms.ChoiceField(help_text="Month: ", choices=MONTHS)
     year = forms.IntegerField(help_text= "Year: ", min_value=1900, max_value=2100)
-    workouts = forms.ModelMultipleChoiceField( queryset=Workout.objects.all(),widget=forms.CheckboxSelectMultiple )
-    meals = forms.ModelMultipleChoiceField( queryset=Meal.objects.all(),widget=forms.CheckboxSelectMultiple)
+    workouts = forms.ModelMultipleChoiceField( help_text="Workouts: ", queryset=Workout.objects.all(),widget=forms.CheckboxSelectMultiple )
+    meals = forms.ModelMultipleChoiceField(help_text="Meals: ", queryset=Meal.objects.all(),widget=forms.CheckboxSelectMultiple)
 
     class Meta:
         model = CalanderDate

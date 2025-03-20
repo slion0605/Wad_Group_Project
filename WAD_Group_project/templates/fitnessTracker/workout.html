@@ -29,7 +29,8 @@
             {% if exercises %}
             <ul id="workout_exercise">
                 {% for exercise in exercises %}
-                <li><h3>{{ exercise.name }}</h3>
+                <li class="exerciseDisplay">
+                    <h3>{{ exercise.name }}</h3>
                     <h4>sets:</h4>
                     <p>{{ exercise.sets }}</p>
                     <br>
