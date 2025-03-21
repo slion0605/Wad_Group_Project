@@ -130,7 +130,7 @@ canvas {
 
 .profile-section h4 {
     font-size: 1em;
-    color: #777;
+    color: #434343;
     display: inline-block;
     padding-right: 20px;
 }
@@ -562,6 +562,14 @@ form input[type="submit"]:hover {
     font-size: 1em;
     color: #777;
 }
+#meal-name{
+    color: #000000;
+    font-weight: bolder;
+}
+.meal-label{
+    color: #434343;
+    font-weight: bold;
+} 
 
 .meal-section .meal-details #edit-form {
     display: none;
