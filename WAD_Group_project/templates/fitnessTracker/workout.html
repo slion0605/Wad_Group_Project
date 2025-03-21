@@ -19,7 +19,7 @@
             <form method="POST" action="{% url 'fitnessTracker:add_to_favourites' workout_name_slug=workout.slug  %}">
                 {% csrf_token %}
                 <button type="submit" id="favourite">
-                    {% if workout in user.favourites.all %}
+                    {% if favourites %}
                         Remove from Favourites
                     {% else %}
                         Add to Favourites
@@ -28,7 +28,7 @@
             {% endif %}
             <h2>{{workout.name}}</h2>
             {% if exercises %}
-                
+            
                 <h4 class="workout-info">Duration:</h4>
                 <p class="workout-info">{{workout.duration}} mins</p> 
                 <h4 class="workout-info">Exercises:</h4>

@@ -49,8 +49,9 @@ def homepage(request):
 
     if request.user.is_authenticated:
         context_dict['meals'] = Meal.objects.filter(user = request.user)
-        context_dict['logs'] = CalanderDate.objects.filter(user = request.user)
-
+        logs = CalanderDate.objects.filter(user = request.user)
+        context_dict['logs'] = logs
+  
     context_dict['workouts'] = Workout.objects.all()
     return render(request, 'fitnessTracker/homepage.html', context=context_dict)
 
@@ -67,6 +68,16 @@ def show_workout(request, workout_name_slug):
             total += 1
 
         context_dict['total'] = total
+
+        user = request.user
+        userProfile = UserProfile.objects.get(user = user)
+        favourites = userProfile.favourites.all()
+        isAFavourite = False
+        for favourite in favourites:
+            if favourite.name == workout.name:
+                isAFavourite= True
+        
+        context_dict['favourites'] = isAFavourite
 
     except Workout.DoesNotExist:
         context_dict['workout'] = None
