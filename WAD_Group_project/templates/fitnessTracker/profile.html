@@ -128,11 +128,11 @@
                             data: {'meal_id': mealId},
                             success: function(response){
                                 $('#meal-name').text(response.name);
-                                $('#meal-calories').text("Calories: " + response.calories);
-                                $('#meal-protein').text("Protein: " + response.protein);
-                                $('#meal-fat').text("Fat: " + response.fat);
-                                $('#meal-carbohydrates').text("Carbohydrates: " + response.carbohydrate);
-                                $('#meal-description').text("Description: " + response.description);
+                                $('#meal-calories').html('<span class="meal-label">Calories:</span> ' + response.calories);
+                                $('#meal-protein').html('<span class="meal-label">Protein:</span> ' + response.protein);
+                                $('#meal-fat').html('<span class="meal-label">Fat:</span> ' + response.fat);
+                                $('#meal-carbohydrates').html('<span class="meal-label">Carbohydrates:</span> ' + response.carbohydrate);
+                                $('#meal-description').html('<span class="meal-label">Description:</span> ' + response.description);
                                 $('.meal-details').show();
                             },
                             error: function(){
@@ -161,9 +161,8 @@
                         },
                         success: function(response){
                             if (response.status === "success"){
-                                $('#meal-description').text(response.data);
+                                $('#meal-description').html('<span class="meal-label">Description:</span> ' + response.data);
                                 $('#edit-form').hide();
-                                alert("Meal description changed successfully")
                             } else {
                                 alert("Error: " + response.message)
                             }
