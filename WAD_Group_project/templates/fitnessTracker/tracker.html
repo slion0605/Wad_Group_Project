@@ -41,6 +41,15 @@
                 {% if user.is_authenticated %}
                     <p id="logMessage" style="display: none;">Add logs to view tracker</p>
                 {% endif %}
+
+                <div class="latest-workout">
+                    <h2>Recommended workout to {{goal}}:</h2>
+                    <ul>
+                        {% for exercise in exercises %}
+                        <li><a href="{% url 'fitnessTracker:show_workout' workout_name_slug=exercise.slug %}">{{ exercise.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         {% endblock %}
     </html>

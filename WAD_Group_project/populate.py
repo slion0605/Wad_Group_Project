@@ -77,6 +77,7 @@ def populate():
         'Cardio Blast': {'exercise_type': Workout.CARDIO, 'duration': 30, 'exercises': cardio_exercises},
         'Get Cardio': {'exercise_type': Workout.CARDIO, 'duration': 120, 'exercises': cardio_exercises_2},
         'Cardio Quick': {'exercise_type': Workout.CARDIO, 'duration': 60, 'exercises': cardio_exercises_3},
+        'Expert Strength Trainer': {'exercise_type': Workout.STRENGTH, 'duration': 40, 'exercises': strength_exercises},
         'Get Strong': {'exercise_type': Workout.STRENGTH, 'duration': 40, 'exercises': strength_exercises_2},
         'Athlete Strength': {'exercise_type': Workout.STRENGTH, 'duration': 95, 'exercises': strength_exercises_3},
         'Flexibility Flow': {'exercise_type': Workout.FLEXIBILITY, 'duration': 21, 'exercises': flexibility_exercises},

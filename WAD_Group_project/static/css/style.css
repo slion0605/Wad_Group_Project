@@ -94,7 +94,7 @@ canvas {
 }
 
 .latest-workout ul li a {
-    color: #007bff;
+    color: rgb(70, 144, 67);
     text-decoration: none;
 }
 
@@ -182,7 +182,7 @@ canvas {
     width: 400px;
     background: #f9f9f9; 
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px hsla(135, 56%, 20%, 0.729);
     border: 1px solid #ccc; 
     float: left;
     
@@ -635,7 +635,33 @@ button:hover {
     text-align: center;
 }
 
-#workout_exercise li{
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.workout-info{
     display: inline-block;
-    margin-right: 50px;
+    margin: 10px;
 }

@@ -26,22 +26,33 @@
                     {% endif %}
                 </button>
             {% endif %}
+            <h2>{{workout.name}}</h2>
             {% if exercises %}
-            <ul id="workout_exercise">
-                {% for exercise in exercises %}
-                <li>
-                    <h3>{{ exercise.name }}</h3>
-                    <h4>sets:</h4>
-                    <p>{{ exercise.sets }}</p>
-                    <br>
-                    <h4>Reps:</h4>
-                    <p>{{ exercise.reps }}</p>
-                    <br>
-                </li>
-                {% endfor %}
-            </ul>
+                
+                <h4 class="workout-info">Duration:</h4>
+                <p class="workout-info">{{workout.duration}} mins</p> 
+                <h4 class="workout-info">Exercises:</h4>
+                <p class="workout-info">{{total}} </p> 
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Exercise Name</th>
+                            <th>Sets</th>
+                            <th>Reps</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for exercise in exercises %}
+                        <tr>
+                            <td>{{ exercise.name }}</td>
+                            <td>{{ exercise.sets }}</td>
+                            <td>{{ exercise.reps }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             {% else %}
-                No Exercises yet.
+                <p>No Exercises yet.</p>
             {% endif %}
             <a href="{% url 'fitnessTracker:add_exercise' workout_name_slug=workout.slug %}">Add Exercise</a> 
             <br />

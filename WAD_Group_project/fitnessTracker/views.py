@@ -61,9 +61,17 @@ def show_workout(request, workout_name_slug):
         exercises = Exercise.objects.filter(workout=workout)
         context_dict['workout'] = workout
         context_dict['exercises']= exercises
+
+        total= 0
+        for exercise in exercises:
+            total += 1
+
+        context_dict['total'] = total
+
     except Workout.DoesNotExist:
         context_dict['workout'] = None
         context_dict['exercises'] = None
+        context_dict['total'] = None
     return render(request, 'fitnessTracker/workout.html', context=context_dict)
 
 @login_required
@@ -180,7 +188,16 @@ def tracker(request):
         context_dict['xValue'] = xValues
         context_dict['yValue'] = yValues
         
-
+    user = request.user
+    userProfile = UserProfile.objects.get(user = user)
+    goal = userProfile.goal
+    context_dict['goal'] = goal
+    if goal == "Lose weight":
+        context_dict['exercises']  = Workout.objects.filter(exercise_type = "Cardio")
+    elif goal == "Maintain weight":
+        context_dict['exercises']  = Workout.objects.filter(exercise_type = "Balance")
+    elif goal == "Gain weight":
+        context_dict['exercises']  = Workout.objects.filter(exercise_type = "Strength")
     return render(request, 'fitnessTracker/tracker.html', context=context_dict)
 
 @login_required

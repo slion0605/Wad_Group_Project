@@ -15,8 +15,8 @@ window.onload = function() {
             datasets: [{
                 fill: false,
                 lineTension: 0,
-                backgroundColor: "rgba(0,0,255,1.0)",
-                borderColor: "rgba(0,0,255,0.1)",
+                backgroundColor: "rgba(70, 144, 67)",
+                borderColor: "rgba(70, 144, 67)",
                 data: yValues
             }]
         },
