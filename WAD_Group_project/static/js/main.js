@@ -5,8 +5,7 @@ const monthYearElement = document.getElementById("monthYear");
 const datesElement = document.getElementById("dates");
 const prevButton = document.getElementById("prevButton");
 const nextButton = document.getElementById("nextButton");
-const logDates = JSON.parse(document.getElementById('logDates').textContent);
-console.log(logDates);
+
 
 let currentDate = new Date();
 
@@ -36,7 +35,7 @@ const updateCalendar = () => {
     for (let i = 1; i <= totalDays; i++) {
         const date = new Date(currentYear, currentMonth, i);
         const activeClass = date.toDateString() === new Date().toDateString() ? 'active' : '';
-        datesHtml += `<div class="date ${activeClass} >${i}</div>`;
+        datesHtml += `<div class="date ${activeClass}">${i}</div>`;
     }
 
   
@@ -96,5 +95,4 @@ $(document).ready(function () {
     $("#addLog").on("click", function() {
         location.href = '/fitnessTracker/add_log/'; 
     });
-
 });
