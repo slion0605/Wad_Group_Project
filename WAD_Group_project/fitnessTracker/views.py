@@ -70,15 +70,17 @@ def show_workout(request, workout_name_slug):
         context_dict['total'] = total
 
         user = request.user
-        userProfile = UserProfile.objects.get(user = user)
-        favourites = userProfile.favourites.all()
-        isAFavourite = False
-        for favourite in favourites:
-            if favourite.name == workout.name:
-                isAFavourite= True
-        
-        context_dict['favourites'] = isAFavourite
+        if user.is_authenticated:
+            userProfile = UserProfile.objects.get(user = user)
+            favourites = userProfile.favourites.all()
+            isAFavourite = False
+            for favourite in favourites:
+                if favourite.name == workout.name:
+                    isAFavourite= True
+            context_dict['favourites'] = isAFavourite
 
+        else:
+            context_dict['favourites'] = False
     except Workout.DoesNotExist:
         context_dict['workout'] = None
         context_dict['exercises'] = None
