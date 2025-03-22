@@ -17,9 +17,9 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
             <script src="{% static 'js/favouriteScript.js' %}" ></script>
             {% if user.is_authenticated %}
-            <form method="POST" action="{% url 'fitnessTracker:add_to_favourites' workout_name_slug=workout.slug  %}" style="box-shadow:none; border-radius: 0px;">
+            <form method="POST" action="{% url 'fitnessTracker:add_to_favourites' workout_name_slug=workout.slug  %}" id="favouriteForm">
                 {% csrf_token %}
-                <button type="submit" id="favourite" style="float: right;">
+                <button type="submit" id="favourite">
                     {% if favourites %}
                         Remove from Favourites
                     {% else %}
@@ -28,12 +28,13 @@
                 </button>
             {% endif %}
             </form>
+            <br>
             <h2>{{workout.name}}</h2>
 
             {% if workout.video_url %}
                 {% with workout.get_embed_url as embed_url %}
                     {% if embed_url %}
-                        <iframe width="500" height="300" src="{{ embed_url }}" frameborder="0" allowfullscreen style="float: right; margin-bottom: 10px;"></iframe>
+                        <iframe width="500" height="300" src="{{ embed_url }}" frameborder="0" allowfullscreen></iframe>
                     {% else %}
                         <p>Video format not supported for embedding.</p>
                     {% endif %}
