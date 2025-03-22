@@ -12,13 +12,14 @@
          </title>
 
         {% block body_block %}
+        <div class = "container">
             <h1>{{workout.name}}</h1>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-            <script src="{% static 'js/favouriteScript.js' %}"></script>
+            <script src="{% static 'js/favouriteScript.js' %}" ></script>
             {% if user.is_authenticated %}
-            <form method="POST" action="{% url 'fitnessTracker:add_to_favourites' workout_name_slug=workout.slug  %}">
+            <form method="POST" action="{% url 'fitnessTracker:add_to_favourites' workout_name_slug=workout.slug  %}" style="box-shadow:none; border-radius: 0px;">
                 {% csrf_token %}
-                <button type="submit" id="favourite">
+                <button type="submit" id="favourite" style="float: right;">
                     {% if favourites %}
                         Remove from Favourites
                     {% else %}
@@ -26,7 +27,21 @@
                     {% endif %}
                 </button>
             {% endif %}
+            </form>
             <h2>{{workout.name}}</h2>
+
+            {% if workout.video_url %}
+                {% with workout.get_embed_url as embed_url %}
+                    {% if embed_url %}
+                        <iframe width="500" height="300" src="{{ embed_url }}" frameborder="0" allowfullscreen style="float: right; margin-bottom: 10px;"></iframe>
+                    {% else %}
+                        <p>Video format not supported for embedding.</p>
+                    {% endif %}
+                {% endwith %}
+            {% else %}
+                <p>No video available for this workout.</p>
+            {% endif %}
+            <br>
             {% if exercises %}
             
                 <h4 class="workout-info">Duration:</h4>
@@ -57,6 +72,6 @@
             <a href="{% url 'fitnessTracker:add_exercise' workout_name_slug=workout.slug %}">Add Exercise</a> 
             <br />
 
-
+        </div>
         {% endblock %}
     </html>s

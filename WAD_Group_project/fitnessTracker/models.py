@@ -39,7 +39,12 @@ class Workout(models.Model):
     exercise_type = models.CharField(max_length=20, choices=EXERCISE_CHOICES, default=CARDIO) 
     duration = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
+    video_url = models.URLField(max_length=200, blank=True, null=True)
 
+    def get_embed_url(self):
+        video_id = self.video_url.split('v=')[-1]
+        return f"https://www.youtube.com/embed/{video_id}"
+        
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Workout, self).save(*args, **kwargs)

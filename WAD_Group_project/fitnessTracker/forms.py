@@ -73,10 +73,10 @@ class WorkoutForm(forms.ModelForm):
     exercise_type = forms.ChoiceField(help_text="Exercise Type: ",choices=EXERCISE_CHOICES)
     duration = forms.IntegerField(help_text="Duration: ")
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
-
+    video_url = forms.URLField(help_text="Enter a youtube link", required=False)
     class Meta:
         model = Workout
-        fields = ('name', 'exercise_type','duration')
+        fields = ('name', 'exercise_type','duration', 'video_url')
 
 class CalanderDateForm(forms.ModelForm):
     MONTHS = [
