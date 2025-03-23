@@ -280,3 +280,23 @@ def update_meal(request):
             return JsonResponse({'status': 'error', 'message': 'Meal not found.'}, status=404)
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=405)
+    
+def search_results(request):
+    if request.method == 'POST':
+        result = None
+        workout = request.POST.get('workout')
+        workouts = Workout.objects.filter(name__icontains=workout)
+        if len(workouts) > 0 and len(workout) > 0:
+            workouts_data = []
+            for i in workouts:
+                workout_data = {
+                    'name': i.name,
+                    'duration': i.duration,
+                    'slug': i.slug,
+                }
+                workouts_data.append(workout_data)
+            result = workouts_data
+        else:
+            result = "No workouts found!"
+        return JsonResponse({'data': result})
+    return JsonResponse({})

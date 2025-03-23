@@ -19,5 +19,6 @@ path('add_log/', views.add_log, name='add_log'),
 path('update_profile/', views.update_profile, name='update_profile'),
 path('get_meal/', views.get_meal, name='get_meal'),
 path('update_meal/', views.update_meal, name='update_meal'),
+path('search/', views.search_results, name='search'),
 ]
   
