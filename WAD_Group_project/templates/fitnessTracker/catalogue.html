@@ -6,6 +6,16 @@
 {% endblock %}
 
 {% block body_block %}
+    <div class="seach">
+        <form id="search-form" autocomplete="off">
+            {% csrf_token %}
+            <input type="text" id="search-input" placeholder="search for workouts i.e. get cardio">
+        </form>
+        <div id="results-box" class="results-card not-visible">
+            
+        </div>
+    </div>
+
     <div class="container">
         <h1>Catalogue</h1>
         {% for key, value in workouts.items %}
@@ -25,6 +35,11 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{% static 'js/catalogueScript.js' %}"></script>
+    <script src="{% static 'js/searchScript.js' %}"></script>
+    <script>
+        const searchUrl = "{% url 'fitnessTracker:search' %}";
+        const csrf_token = "{{ csrf_token }}"
+    </script>
 {% endblock %}
 
 

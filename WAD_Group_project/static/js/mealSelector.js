@@ -65,7 +65,6 @@ $(document).ready(function () {
             data: {
                 'meal_id': meal_id,
                 'description': new_description,
-                'csrfmiddlewaretoken': '{{ csrf_token }}'
             },
             success: function(response){
                 if (response.status === "success"){
@@ -73,7 +72,7 @@ $(document).ready(function () {
                     $('#edit-form').hide();
                     alert("Meal description changed successfully")
                 } else {
-                    alert("Error: " + response.message)
+                    alert("Error: " + response.message);
                 }
             },
             error: function () {
