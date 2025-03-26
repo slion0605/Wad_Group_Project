@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load staticfiles %}
+{% load static %}
 
 <html>
 <head lang="en">
@@ -10,6 +10,9 @@
                 Fitness Tracker
             {% endblock %}
         </title>
+
+        {% block head %}
+        {% endblock %}
 </head>
     <body>
         <div >
@@ -35,5 +38,7 @@
         {% block body_block %}
         {% endblock %}
         </div>
+
+
     </body>
 </html>

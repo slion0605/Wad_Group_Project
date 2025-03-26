@@ -1,7 +1,11 @@
+$(document).ready(function(){
+    console.log("catalogue.js loaded");
 
-$(document).ready(function () {
-    $("[id^='browse-']").click(function () {
-        let key = $(this).attr("id").replace("browse-", "");
-        document.getElementById(key + "-info").style.display = "block"; 
+    $("#catalogue-accordion").accordion({
+        collapsible: true,
+        active: false,
+        event:"mouseover",        // All panels start collapsed
+        heightStyle: "content" // Accordion panels adjust to fit their content
     });
+    console.log("Accordion initialized");
 });
