@@ -182,15 +182,28 @@ def tracker(request):
         logs = CalanderDate.objects.filter(user=request.user).order_by('year', 'month', 'day')
 
         xValues = ""
-        yValues = ""
+        caloriesValues = ""
+        proteinValues = ""
+        carbsValues = ""
+        fatValues = ""
 
         for log in logs:
-            xValues += (f"{log.day} {log.month} {log.year}, ") 
-            count = 0
-            for meal in log.meals.all():
-                count += meal.calories
-            yValues += f"{count} " 
+            xValues += f"{log.day} {log.month} {log.year}, "
+            total_calories = 0
+            total_protein = 0
+            total_carbs = 0
+            total_fat = 0
 
+            for meal in log.meals.all():
+                total_calories += meal.calories
+                total_protein += meal.protein
+                total_carbs += meal.carbohydrate
+                total_fat += meal.fat
+
+            caloriesValues += f"{total_calories},"
+            proteinValues += f"{total_protein},"
+            carbsValues += f"{total_carbs},"
+            fatValues += f"{total_fat},"
         
         if logs != None :
             context_dict['newestLog'] = logs.last()
@@ -199,7 +212,10 @@ def tracker(request):
             context_dict['newestLog'] = None
         
         context_dict['xValue'] = xValues
-        context_dict['yValue'] = yValues
+        context_dict['caloriesValue'] = caloriesValues
+        context_dict['proteinValue'] = proteinValues
+        context_dict['carbsValue'] = carbsValues
+        context_dict['fatValue'] = fatValues
         
     user = request.user
     userProfile = UserProfile.objects.get(user = user)

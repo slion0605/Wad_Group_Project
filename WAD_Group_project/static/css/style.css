@@ -703,4 +703,27 @@ iframe{
     border-radius: 7px;
     padding: 15xx 15px;
     margin: 0 auto;
+    background: #f9f9f9; 
+}
+
+.results-card h3{
+    margin-left: 10px;
+
+}
+
+.results-card p{
+    margin-left: 20px;
+
+}
+
+.results-card a{
+    margin: 20px;
+    color: #4CAF50;
+}
+.seach{
+    margin: 10px;
+}
+
+#TrackerGraph{
+    height: 400px;
 }
