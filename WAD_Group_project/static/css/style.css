@@ -281,53 +281,7 @@ button:hover {
     background: #218838;
 }
 
-.catalogue-item {
-    margin-bottom: 20px;
-    padding: 10px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ccc; 
 
-}
-
-.catalogue-item p {
-    font-size: 1.2em;
-    color: #555;
-}
-
-.catalogue-item button {
-    padding: 10px 20px;
-    background: #28a745;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.catalogue-item button:hover {
-    background: #218838;
-}
-
-.catalogue-item ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-}
-
-.catalogue-item ul li {
-    margin-bottom: 5px;
-}
-
-.catalogue-item ul li a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.catalogue-item ul li a:hover {
-    text-decoration: underline;
-}
 
 .nav {
     list-style-type: none;
@@ -532,6 +486,88 @@ form input[type="submit"]:hover {
     margin-bottom: 10px;
 }
 
+#catalogue-accordion h3 {
+    background: linear-gradient(90deg, #2f2f2f, #3a3a3a);
+    margin: 0;
+    padding: 20px 20px;
+    cursor: pointer;
+    border: 1px solid #444;
+    color: #ddd;
+    font-weight: 600;
+    position: relative;
+    transition: background 0.3s, color 0.3s;
+    font-size : 1.4em;
+    height: 120px;
+    display: flex;
+    align-items: center;
+}
+
+
+#catalogue-accordion h3:hover {
+    background: linear-gradient(90deg, #3a3a3a, #454545);
+    color: #fff;
+    box-shadow: 0 0 5px #555;
+}
+
+
+#catalogue-accordion h3::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background: linear-gradient(180deg, #00ffa2, #00b4ff);
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+#catalogue-accordion h3:hover::before {
+    opacity: 1;
+}
+
+#catalogue-accordion div {
+    border: 1px solid #444;
+    border-top: none;
+    padding: 10px 15px;
+    background: #1f1f1f;
+    color: #ccc;
+    transition: background 0.3s, color 0.3s;
+}
+
+#catalogue-accordion div:hover {
+    background: #252525;
+}
+
+#catalogue-accordion ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+#catalogue-accordion ul li {
+    margin-bottom: 5px;
+}
+
+#catalogue-accordion ul li a {
+    color: #00ffa2;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+#catalogue-accordion ul li a:hover {
+    color: #00b4ff; 
+    text-decoration: underline;
+}
+
+.accordion-icon {
+    width: 180px;
+    height: 100px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+
+
 .meal-section {
     display: flex;
     flex-direction: column;
@@ -701,7 +737,7 @@ iframe{
     box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.25);
     transition: 0.5s;
     border-radius: 7px;
-    padding: 15xx 15px;
+    padding: 15px 15px;
     margin: 0 auto;
     background: #f9f9f9; 
 }

@@ -1,32 +1,36 @@
-<!DOCTYPE html>
+{% extends 'fitnessTracker/base.html' %}
+ {% load static %}
+{% block title_block %}
+    Add Exercise
+{% endblock %}
 
-    <html>
-        {% extends 'fitnessTracker/base.html' %}
-        {% load staticfiles %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{% static 'js/addExerciseScript.js' %}"></script>
+{% endblock %}
+   
         
-        <title>
-        {% block title_block %}
-            Add Exercise
-        {% endblock %}
-         </title>
 
-        {% block body_block %}
-            <h1>Add Exercise</h1>
+{% block body_block %}
+    <h1>Add Exercise</h1>
 
-            <div>
-                <form id="Exercise_Form" method="post" action= "{% url 'fitnessTracker:add_exercise' workout_name_slug=workout.slug %}">
-                    {% csrf_token %}
-                    {% for hidden in form.hidden_fields %}
-                        {{ hidden }}
-                    {% endfor %}
-                    {% for field in form.visible_fields %}
-                        {{ field.errors }}
-                        {{ field.help_text }}
-                        {{ field }}
-                        <br>
-                    {% endfor %}
+        <div>
+             <form id="Exercise_Form" method="post" action= "{% url 'fitnessTracker:add_exercise' workout_name_slug=workout.slug %}">
+                {% csrf_token %}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                {% for field in form.visible_fields %}
+                    {{ field.errors }}
+                    {{ field.help_text }}
+                    {{ field }}
+                    <br>
+                {% endfor %}
                     <input type="submit" name="submit" value="Create Exercise" />
                 </form>
             </div>
-        {% endblock %}
-    </html>
+{% endblock %}
+    

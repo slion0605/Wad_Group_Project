@@ -23,4 +23,23 @@
     <a href="{% url 'auth_password_change' %}">Change Password</a>
 </p>
 
+<script>
+    $(document).ready(function () {
+        $("form").hide().fadeIn(800);
+
+        $("#sign_up").hide().delay(500).fadeIn(800);
+
+        $("input[type='text'], input[type='password']").hover(
+            function () {
+                $(this).stop().animate({ backgroundColor: "#e6f7ff" }, 300);
+            },
+            function () {
+                $(this).stop().animate({ backgroundColor: "#fff" }, 300);
+            }
+        );
+
+        $("#login-errors").hide().fadeIn(600).delay(2000).fadeOut(800);
+    });
+</script>
+
 {% endblock %}

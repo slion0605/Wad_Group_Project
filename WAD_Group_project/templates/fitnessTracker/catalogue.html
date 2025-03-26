@@ -5,7 +5,67 @@
     Catalogue
 {% endblock %}
 
+{% block head %}
+  
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="{% static 'js/catalogueScript.js' %}"></script>
+{% endblock %}
+
 {% block body_block %}
+    <h1>Catalogue</h1>
+
+    <div id="catalogue-accordion">
+        {% for category, workout_list in workouts.items %}
+        <h3>
+            {% if category == "Cardio" %}
+                <img src="{% static 'images/cardio.jpg' %}" alt="Cardio" class="accordion-icon">
+            {% elif category == "Strength" %}
+                <img src="{% static 'images/strength.webp' %}" alt="Strength" class="accordion-icon">
+            {% elif category == "Flexibility" %}
+                <img src="{% static 'images/flexibility.jpg' %}" alt="Flexibility" class="accordion-icon">
+            {% elif category == "Balance" %}
+                <img src="{% static 'images/balance.jpg' %}" alt="Balance" class="accordion-icon">
+            {% elif category == "Bicep" %}
+                <img src="{% static 'images/bicep.jpg' %}" alt="Bicep" class="accordion-icon">
+            {% elif category == "Tricep" %}
+                <img src="{% static 'images/tricep.jpg' %}" alt="Tricep" class="accordion-icon">
+            {% elif category == "Legs" %}
+                <img src="{% static 'images/legs.jpg' %}" alt="Legs" class="accordion-icon">
+            {% elif category == "Chest" %}
+                <img src="{% static 'images/chest.jpg' %}" alt="Chest" class="accordion-icon">
+            {% elif category == "Back" %}
+                <img src="{% static 'images/back.jpg' %}" alt="Back" class="accordion-icon">
+            {% elif category == "Shoulder" %}
+                <img src="{% static 'images/shoulder.jpg' %}" alt="Shoulder" class="accordion-icon">
+            {% elif category == "Forearm" %}
+                <img src="{% static 'images/forearm.jpg' %}" alt="Forearm" class="accordion-icon">
+            {% elif category == "Abs" %}
+                <img src="{% static 'images/abs.jpg' %}" alt="Abs" class="accordion-icon">
+            {% endif %}
+            {{ category }}
+        </h3>
+
+
+
+            <div>
+                <ul>
+                    {% for workout in workout_list %}
+                        <li>
+                            <a href="{% url 'fitnessTracker:show_workout' workout_name_slug=workout.slug %}">
+                                {{ workout.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+        {% endfor %}
+    </div>
+
     <div class="seach">
         <form id="search-form" autocomplete="off">
             {% csrf_token %}
@@ -16,30 +76,12 @@
         </div>
     </div>
 
-    <div class="container">
-        <h1>Catalogue</h1>
-        {% for key, value in workouts.items %}
-            <div class="catalogue-item" id="{{ key }}">
-                <p>{{ key }}</p>
-                <button id="browse-{{ key }}" type="button">Browse</button>
-                <div id="{{ key }}-info" style="display: none;">
-                    <ul>
-                        {% for workout in value %}
-                            <li><a href="{% url 'fitnessTracker:show_workout' workout_name_slug=workout.slug %}">{{ workout.name }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+    
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{% static 'js/catalogueScript.js' %}"></script>
+    
     <script src="{% static 'js/searchScript.js' %}"></script>
     <script>
         const searchUrl = "{% url 'fitnessTracker:search' %}";
         const csrf_token = "{{ csrf_token }}"
     </script>
 {% endblock %}
-
-
