@@ -247,13 +247,17 @@ form input[type="submit"]:hover {
 #catalogue-accordion h3 {
     background: linear-gradient(90deg, #2f2f2f, #3a3a3a);
     margin: 0;
-    padding: 10px 15px;
+    padding: 20px 20px;
     cursor: pointer;
     border: 1px solid #444;
     color: #ddd;
     font-weight: 600;
     position: relative;
     transition: background 0.3s, color 0.3s;
+    font-size : 1.4em;
+    height: 120px;
+    display: flex;
+    align-items: center;
 }
 
 
@@ -309,15 +313,21 @@ form input[type="submit"]:hover {
 }
 
 #catalogue-accordion ul li a:hover {
-    color: #00b4ff; /* Another neon shade on hover */
+    color: #00b4ff; 
     text-decoration: underline;
 }
 
 .accordion-icon {
-    width: 150px;
-    height: auto;
+    width: 180px;
+    height: 100px;
     vertical-align: middle;
     margin-right: 10px;
+}
+
+#catalogue-accordion {
+    max-width: 1000px; /* Increase this to make it wider */
+    margin: 0 auto;     /* Center it */
+    width: 100%;
 }
 
 
