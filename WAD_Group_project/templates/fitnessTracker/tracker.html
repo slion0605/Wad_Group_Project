@@ -16,13 +16,19 @@
                 <h1>Tracker</h1>
 
                 <p id="xValues" style="display: none;">{{ xValue }}</p>
-                <p id="yValues" style="display: none;">{{ yValue }}</p>
+                <p id="caloriesValue" style="display: none;" >{{ caloriesValue }}</p>
+                <p id="proteinValue" style="display: none;">{{ proteinValue }}</p>
+                <p id="carbsValue" style="display: none;">{{ carbsValue }}</p>
+                <p id="fatValue" style="display: none;">{{ fatValue }}</p>
 
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
                 <script src="{% static 'js/trackerScript.js' %}"></script>
 
                 <h2>Calorie Tracker</h2>
-                <canvas id="myChart"></canvas>
+                <div id="TrackerGraph">
+                    <canvas id="myChart"></canvas>
+                </div>
+                
 
                 <div class="latest-workout">
                     <h2>Latest Workout</h2>

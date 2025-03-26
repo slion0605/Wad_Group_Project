@@ -723,3 +723,7 @@ iframe{
 .seach{
     margin: 10px;
 }
+
+#TrackerGraph{
+    height: 400px;
+}
