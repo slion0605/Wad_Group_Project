@@ -697,7 +697,7 @@ iframe{
     display: none;
 }
 .results-card{
-    width: 60%;
+    width: 40%;
     box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.25);
     transition: 0.5s;
     border-radius: 7px;
@@ -719,4 +719,7 @@ iframe{
 .results-card a{
     margin: 20px;
     color: #4CAF50;
+}
+.seach{
+    margin: 10px;
 }
