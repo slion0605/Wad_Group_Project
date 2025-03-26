@@ -60,12 +60,28 @@ class WorkoutForm(forms.ModelForm):
     STRENGTH = "Strength"
     FLEXIBILITY = "Flexibility"
     BALANCE = "Balance"
+    CHEST = "Chest"
+    BICEP = "Bicep"
+    TRICEP = "Tricep"
+    SHOULDER = "Shoulder"
+    FOREARM = "Forearm"
+    BACK = "Back"
+    LEGS = "Legs"
+    ABS = "Abs"
 
     EXERCISE_CHOICES = [
         (CARDIO, "Cardio"),
         (STRENGTH, "Strength"),
         (FLEXIBILITY, "Flexibility"),
         (BALANCE, "Balance"),
+        (CHEST, "Chest"),
+        (BICEP, "Bicep"),
+        (TRICEP, "Tricep"),
+        (SHOULDER, "Shoulder"),
+        (FOREARM, "Forearm"),
+        (BACK, "Back"),
+        (LEGS, "Legs"),
+        (ABS, "Abs"),
     ]
 
     

@@ -27,12 +27,28 @@ class Workout(models.Model):
     STRENGTH = "Strength"
     FLEXIBILITY = "Flexibility"
     BALANCE = "Balance"
+    CHEST = "Chest"
+    BICEP = "Bicep"
+    TRICEP = "Tricep"
+    SHOULDER = "Shoulder"
+    FOREARM = "Forearm"
+    BACK = "Back"
+    LEGS = "Legs"
+    ABS = "Abs"
 
     EXERCISE_CHOICES = [
         (CARDIO, "Cardio"),
         (STRENGTH, "Strength"),
         (FLEXIBILITY, "Flexibility"),
         (BALANCE, "Balance"),
+        (CHEST, "Chest"),
+        (BICEP, "Bicep"),
+        (TRICEP, "Tricep"),
+        (SHOULDER, "Shoulder"),
+        (FOREARM, "Forearm"),
+        (BACK, "Back"),
+        (LEGS, "Legs"),
+        (ABS, "Abs"),
     ]
 
     name = models.CharField(max_length=128)
