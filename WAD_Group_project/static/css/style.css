@@ -767,3 +767,51 @@ iframe{
 #TrackerGraph{
     height: 400px;
 }
+
+.catalogue-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc; 
+
+}
+
+.catalogue-item p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.catalogue-item button {
+    padding: 10px 20px;
+    background: #28a745;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.catalogue-item button:hover {
+    background: #218838;
+}
+
+.catalogue-item ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.catalogue-item ul li {
+    margin-bottom: 5px;
+}
+
+.catalogue-item ul li a {
+    color: #248817;
+    text-decoration: none;
+}
+
+.catalogue-item ul li a:hover {
+    text-decoration: underline;
+}
