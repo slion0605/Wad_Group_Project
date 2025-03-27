@@ -1,25 +1,19 @@
-$(document).ready(function () {
-    const $heading = $("h1");
-    const $form = $("#meal_form");
-    const $submit = $("input[type='submit']");
-
-   
-    $heading.hide();
-    $form.hide();
-    $submit.css("opacity", 0);
-
-   
-    $heading.fadeIn(1000);
-    $form.delay(500).slideDown(1000);
-    $submit.delay(1500).animate({ opacity: 1 }, 500);
+$(document).ready(function(){
+    $("h1").hide();
+    $("#meal_form").hide();
+    $("input[type='submit']").css("opacity", 0);
 
 
-    $submit.hover(
-        function () {
-            $(this).stop().animate({ backgroundColor: "#218838" }, 300);
+    $("h1").fadeIn(1000);
+    $("#meal_form").delay(500).slideDown(1000);
+    $("input[type='submit']").delay(1500).animate({opacity: 1}, 500);
+
+    $("input[type='submit']").hover(
+        function(){
+            $(this).animate({backgroundColor: "#218838"}, 300);
         },
-        function () {
-            $(this).stop().animate({ backgroundColor: "#28a745" }, 300);
+        function(){
+            $(this).animate({backgroundColor: "#28a745"}, 300);
         }
     );
-});
+})

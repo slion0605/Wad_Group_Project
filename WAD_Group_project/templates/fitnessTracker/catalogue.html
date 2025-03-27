@@ -17,6 +17,15 @@
 
 {% block body_block %}
     <h1>Catalogue</h1>
+    <div class="seach">
+        <form id="search-form" autocomplete="off">
+            {% csrf_token %}
+            <input type="text" id="search-input" placeholder="search for workouts i.e. get cardio">
+        </form>
+        <div id="results-box" class="results-card not-visible">
+            
+        </div>
+    </div>
 
     <div id="catalogue-accordion">
         {% for category, workout_list in workouts.items %}
@@ -66,15 +75,7 @@
         {% endfor %}
     </div>
 
-    <div class="seach">
-        <form id="search-form" autocomplete="off">
-            {% csrf_token %}
-            <input type="text" id="search-input" placeholder="search for workouts i.e. get cardio">
-        </form>
-        <div id="results-box" class="results-card not-visible">
-            
-        </div>
-    </div>
+    
 
     
 

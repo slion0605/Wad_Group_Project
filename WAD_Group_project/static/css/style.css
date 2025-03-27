@@ -469,6 +469,7 @@ form input[type="submit"] {
     font-size: 1em;
     cursor: pointer;
     transition: background 0.3s;
+    margin-top: 10px;
 }
 
 form input[type="submit"]:hover {
@@ -487,12 +488,12 @@ form input[type="submit"]:hover {
 }
 
 #catalogue-accordion h3 {
-    background: linear-gradient(90deg, #2f2f2f, #3a3a3a);
+    background: white;
     margin: 0;
     padding: 20px 20px;
     cursor: pointer;
-    border: 1px solid #444;
-    color: #ddd;
+    
+    color: #000000;
     font-weight: 600;
     position: relative;
     transition: background 0.3s, color 0.3s;
@@ -504,7 +505,7 @@ form input[type="submit"]:hover {
 
 
 #catalogue-accordion h3:hover {
-    background: linear-gradient(90deg, #3a3a3a, #454545);
+    background: lightgray;
     color: #fff;
     box-shadow: 0 0 5px #555;
 }
@@ -527,16 +528,19 @@ form input[type="submit"]:hover {
 }
 
 #catalogue-accordion div {
-    border: 1px solid #444;
     border-top: none;
     padding: 10px 15px;
-    background: #1f1f1f;
-    color: #ccc;
+    color: #000000;
+    max-width: auto;
+    padding: 20px;
+    background: #fff; 
+    border: 1px solid #ccc; 
+
     transition: background 0.3s, color 0.3s;
 }
 
 #catalogue-accordion div:hover {
-    background: #252525;
+    background: lightgray;
 }
 
 #catalogue-accordion ul {
@@ -549,13 +553,13 @@ form input[type="submit"]:hover {
 }
 
 #catalogue-accordion ul li a {
-    color: #00ffa2;
+    color: #2ba014; 
     text-decoration: none;
     transition: color 0.3s;
 }
 
 #catalogue-accordion ul li a:hover {
-    color: #00b4ff; 
+    color: #2ba014; 
     text-decoration: underline;
 }
 

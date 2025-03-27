@@ -210,7 +210,6 @@ def tracker(request):
 
         else:
             context_dict['newestLog'] = None
-        
         context_dict['xValue'] = xValues
         context_dict['caloriesValue'] = caloriesValues
         context_dict['proteinValue'] = proteinValues
